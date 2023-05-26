@@ -50,6 +50,7 @@ export const deleteOrder = createAsyncThunk("orders/delete", async (body:GetById
 
 export const getOrderDetails = createAsyncThunk("orders/getDetails", async (body:GetByIdRequest)=>{
     const response = await api.get(`${process.env.SERVER_URL}/api/v1/order/${body.id}`)
+    console.log(response.data)
     return response.data.item;
 })
 
