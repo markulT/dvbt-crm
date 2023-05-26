@@ -8,13 +8,24 @@ export interface IOrder {
     finalPrice:number,
     id?:string,
 }
+
+export interface OrderItem {
+    product: Product,
+    quantity:number
+}
+
 export interface IFullOrder {
     location:string,
     orderedBy:string,
     orderedFullName:string,
     finalPrice:number,
-    productList:Product[],
+    productList:OrderItem[],
     orderStatus:string,
-    engineer:Engineer,
+    engineer?:Engineer,
     id?:string
+}
+
+export interface CreateOrder {
+    productList:OrderItem[],
+    location:string
 }

@@ -27,6 +27,11 @@ const OrdersPage:FC<OrdersPageProps> = () => {
 
     return (
         <div className={'flex-1 min-h-screen min-w-screen p-4'}>
+
+            <button className={"p-3 bg-gray-800 rounded-3xl mb-4"} onClick={()=>{router.push('/orders/test')}}>
+                Take order (Test)
+            </button>
+
             <div className={"bg-gray-800 w-full p-3 rounded-3xl"}>
 
                 <div className={`flex w-full items-center ${searchFocused ? "outline-amber-50" : "outline-amber-200"}`}>

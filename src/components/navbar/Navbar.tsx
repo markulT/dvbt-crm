@@ -35,7 +35,7 @@ export default function Navbar() {
 
                 <div className={"pl-4 pr-4 flex items-center cursor-pointer"} onClick={()=>goTo('category')}>
                     <AiOutlineTag className={"text-3xl mr-2"}/>
-                    <p className={"text-xl letterMeme"}>Категорії</p>
+                    <p className={`text-xl ${process.env.MEME_MODE ? "letterMeme" : ""}`}>Категорії</p>
                 </div>
 
                 <div className={"pl-4 mt-1 pr-4 flex items-center cursor-pointer"} onClick={()=>goTo('engineers/1')}>

@@ -1,6 +1,11 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Product, ShortProduct} from "@/store/models/Product";
-import {getAllProducts, getSingleProduct, updateProduct} from "@/store/reducers/products/productThunks";
+import {
+    getAllProducts,
+    getProductImage,
+    getSingleProduct,
+    updateProduct
+} from "@/store/reducers/products/productThunks";
 import {GetList} from "@/store/types/getList";
 import {GetSingle} from "@/store/types/getSingle";
 
@@ -8,12 +13,14 @@ interface IProductState {
     list:ShortProduct[],
     currentItem:Product,
     error:string
+    currentImageUrl:string,
 }
 
 const initialState:IProductState = {
     list:[],
     currentItem:null as Product,
-    error:''
+    error:'',
+    currentImageUrl:''
 }
 
 export const productSlice = createSlice({
@@ -32,6 +39,9 @@ export const productSlice = createSlice({
         },
         [updateProduct.fulfilled.type]: (state, action:PayloadAction<Product>) => {
             state.currentItem = action.payload
+        },
+        [getProductImage.fulfilled.type]:(state, action:PayloadAction<Blob>) => {
+            state.currentImageUrl = action.payload;
         }
     }
 })

@@ -22,7 +22,7 @@ export default function Login() {
         dispatch(login({email:email, password:password}))
     }
     function testRefresh() {
-        dispatch(refresh(''))
+        dispatch(refresh({}))
     }
 
     return (

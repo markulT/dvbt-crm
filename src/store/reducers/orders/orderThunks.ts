@@ -3,6 +3,7 @@ import api from "@/api/authApi";
 import {GetPageRequest} from "@/store/types/GetPage";
 import {GetByIdRequest} from "@/store/types/getByIdRequest";
 import authApi from "@/api/authApi";
+import {CreateOrder} from "@/store/models/IOrders";
 
 
 export const getAllOrders = createAsyncThunk("orders/getAll", async (body:GetPageRequest)=> {
@@ -26,9 +27,20 @@ interface UpdateOrderStatus {
     status:OrderStatus
 }
 
-export const createOrder = createAsyncThunk("orders/create", async (body:createOrderBody)=>{
+interface OrderItemRequest {
+    productId:string,
+    quantity:number
+}
+
+export interface CreateOrderRequest {
+    productList:OrderItemRequest,
+    location:string
+}
+
+export const intentOrder = createAsyncThunk("orders/create", async (body:CreateOrderRequest)=>{
     const response = await api.post(`${process.env.SERVER_URL}/api/v1/order/create`, body)
-    return response.data;
+    console.log(response.data)
+    return response.data.clientSecret;
 })
 
 export const deleteOrder = createAsyncThunk("orders/delete", async (body:GetByIdRequest)=> {

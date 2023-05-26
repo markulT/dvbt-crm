@@ -41,3 +41,15 @@ export const updateProduct = createAsyncThunk('product/update', async (body:Upda
     })
     return response.data;
 })
+
+export const setProductImage = createAsyncThunk("product/setImage", async ({formData})=>{
+    // body should contain both productId and file that you want to store
+    const response = await api.put(`${process.env.SERVER_URL}/api/v1/products/image/update`, formData)
+    return null;
+})
+
+export const getProductImage = createAsyncThunk("product/getImage", async (body:GetByIdRequest)=>{
+    const response = await api.get(`${process.env.SERVER_URL}/api/v1/products/image/${body.id}`, {responseType:"blob"})
+    // const imageUrl = URL.createObjectURL(response.data);
+    return URL.createObjectURL(response.data);
+})
