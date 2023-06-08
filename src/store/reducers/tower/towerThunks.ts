@@ -18,3 +18,7 @@ export const getSingle = createAsyncThunk('tower/get', async (body:GetByIdReques
     const response = await api.get(`${process.env.SERVER_URL}/api/v1/towers/${body.id}`);
     return response.data
 })
+export const deleteTower = createAsyncThunk("tower/delete", async (body:GetByIdRequest) => {
+    const response = await api.delete(`${process.env.SERVER_URL}/api/v1/towers/delete/${body.id}`)
+    return response.data
+})

@@ -49,7 +49,17 @@ export const setProductImage = createAsyncThunk("product/setImage", async ({form
 })
 
 export const getProductImage = createAsyncThunk("product/getImage", async (body:GetByIdRequest)=>{
-    const response = await api.get(`${process.env.SERVER_URL}/api/v1/products/image/${body.id}`, {responseType:"blob"})
+    const response = await api.get(`${process.env.SERVER_URL}/api/v1/products/imageUrl/${body.id}`, {responseType:"blob"})
     // const imageUrl = URL.createObjectURL(response.data);
     return URL.createObjectURL(response.data);
+})
+
+interface UpdateProductCategory {
+    categoryId:string,
+    productId:string
+}
+
+export const updateProductCategory = createAsyncThunk("product/updateCategory", async (body: UpdateProductCategory)=>{
+    const response = await api.put(`${process.env.SERVER_URL}/api/v1/products/update/category`,  body)
+    return response.data
 })

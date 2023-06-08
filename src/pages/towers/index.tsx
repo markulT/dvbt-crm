@@ -2,7 +2,7 @@ import {FC, useEffect, useState} from "react";
 import {BiSearch} from "react-icons/bi";
 import {FaPlus} from "react-icons/fa";
 import {useAppDispatch, useAppSelector} from "@/store/hooks/redux";
-import {getAll} from "@/store/reducers/tower/towerThunks";
+import {createTower, deleteTower, getAll} from "@/store/reducers/tower/towerThunks";
 import TowerElement from "@/components/towers/TowerElement";
 import {Tower} from "@/store/models/Tower";
 
@@ -20,14 +20,22 @@ const Towers:FC<TowerProps> = () => {
         dispatch(getAll())
     }, [])
 
-    async function submitCreate() {
 
-    }
 
     const [name, setName] = useState<string>('')
     const [longitude, setLongitude] = useState<string>("")
     const [latitude, setLatitude] = useState<string>("")
     const [rangeInMeters, setRangeInMeters] = useState<string>("")
+
+    async function submitCreate() {
+        await dispatch(createTower({latitude: Number(latitude), longitude: Number(longitude), name: name, rangeInMeters: Number(rangeInMeters)}))
+        setLatitude("")
+        setLongitude("")
+        setRangeInMeters("")
+        setName("")
+        setCreate(false)
+        dispatch(getAll())
+    }
 
     return (
         <div className={"flex-1 min-h-screen min-w-screen p-4"}>

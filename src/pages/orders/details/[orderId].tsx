@@ -42,11 +42,7 @@ const OrderDetails: FC = () => {
             <div className={`text-3xl`}>
                 <BiArrowBack
                     onClick={() => {
-                        let russianRoulette = Math.floor(Math.random() * 100)
-                        if (russianRoulette > 50) {
-                            router.back()
-                        }
-                        window.location.href = 'https://www.pornhub.com/'
+                        router.back()
                 }}/>
             </div>
 

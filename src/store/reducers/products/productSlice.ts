@@ -4,7 +4,7 @@ import {
     getAllProducts,
     getProductImage,
     getSingleProduct,
-    updateProduct
+    updateProduct, updateProductCategory
 } from "@/store/reducers/products/productThunks";
 import {GetList} from "@/store/types/getList";
 import {GetSingle} from "@/store/types/getSingle";
@@ -34,7 +34,6 @@ export const productSlice = createSlice({
             state.list = action.payload.list;
         },
         [getSingleProduct.fulfilled.type]: (state, action:PayloadAction<GetSingle<Product>>) => {
-
             state.currentItem = action.payload.item;
         },
         [updateProduct.fulfilled.type]: (state, action:PayloadAction<Product>) => {
@@ -42,6 +41,9 @@ export const productSlice = createSlice({
         },
         [getProductImage.fulfilled.type]:(state, action:PayloadAction<Blob>) => {
             state.currentImageUrl = action.payload;
+        },
+        [updateProductCategory.fulfilled.type]:(state, action:PayloadAction<GetSingle<Product>>) => {
+            state.currentItem = action.payload.item;
         }
     }
 })

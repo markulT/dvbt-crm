@@ -35,7 +35,7 @@ const ProductPage:FC = () => {
     const [name,setName] = useState<string>('');
     const [title,setTitle] = useState<string>('');
     const [desc ,setDesc] = useState<string>('');
-    const [price,setPrice] = useState<number>();
+    const [price,setPrice] = useState<number>(0);
     const [imgName, setImgName] = useState<string>('')
 
     //Створити галімий товар
@@ -84,7 +84,7 @@ const ProductPage:FC = () => {
                 </div>
 
                 <div className={"mt-4"}>
-                    {products ? products.map((product)=><ProductElement key={product.id} name={product.name} title={product.title} price={product.price} imgName={product.imgName} id={product.id}/>) : ""}
+                    {products ? products.map((product)=><ProductElement key={product.id} name={product.name} title={product.title} price={product.price} imgName={product.imgName} id={product.id?.toString()}/>) : ""}
                 </div>
 
                 {/*<Paginator name={"clients"} length={length} pageSize={5}/>*/}

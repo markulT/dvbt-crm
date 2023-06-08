@@ -8,6 +8,7 @@ import {addToCartAction} from "@/store/reducers/orders/orderSlice";
 import {Product} from "@/store/models/Product";
 import ProductItem from "@/components/products/ProductItem";
 import {CreateOrderRequest, intentOrder} from "@/store/reducers/orders/orderThunks";
+import {useRouter} from "next/router";
 
 
 const TestOrder: FC = () => {
@@ -16,6 +17,7 @@ const TestOrder: FC = () => {
     const dispatch = useDispatch()
     const [location, setLocation] = useState<string>('')
     const createOrder = useSelector(state => state.orders.createOrder)
+    const router = useRouter()
 
 
     function addToCart(product: Product) {
@@ -25,14 +27,15 @@ const TestOrder: FC = () => {
         dispatch(addToCartAction(product));
     }
 
-    function submit() {
+    async function submit() {
         if (createOrder.productList === [] || location === '') {
             return
         }
         const orderItemList = createOrder.productList.map(orderItem=>{
             return {productId:orderItem.product.id, quantity:orderItem.quantity}
         })
-        dispatch(intentOrder({productList:orderItemList, location:location}))
+        await dispatch(intentOrder({productList:orderItemList, location:location}))
+        router.push('test/payment');
     }
 
     return (
@@ -73,7 +76,6 @@ const TestOrder: FC = () => {
                     <div className={"flex items-center bg-green-rgba p-2 mt-2 cursor-pointer rounded-3xl"} onClick={submit}>
                         <span className={"mr-4"}>{createOrder.productList.reduce((total, orderItem)=>total + (orderItem.product.price * orderItem.quantity), 0)}</span>
                         <button onClick={() => {
-
                         }}>Оплатити
                         </button>
                     </div>
