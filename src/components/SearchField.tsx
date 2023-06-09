@@ -10,7 +10,7 @@ const SearchField:FC<SearchFieldProps> = () => {
 
 
     return (
-        <div className={`flex w-full items-center ${searchFocused ? "outline-amber-50" : "outline-amber-200"}`}>
+        <div className={`flex w-full items-center bg-white shadow-blue-6 ${searchFocused ? "outline-amber-50" : "outline-amber-200"}`}>
             <input className={"p-2 bg-transparent rounded-3xl focus:outline-0"} value={search}
                    onChange={(e) => {
                        setSearch(e.target.value.toString())

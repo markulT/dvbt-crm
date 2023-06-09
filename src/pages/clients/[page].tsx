@@ -28,11 +28,11 @@ export default function Clients() {
 
 
     return (
-        <div className={'flex-1 min-h-screen min-w-screen p-4'}>
+        <div className={'flex-1 bg-blue-5 min-h-screen min-w-screen p-4'}>
             <div className={"bg-gray-800 w-full p-3 rounded-3xl"}>
 
-                <div className={`flex items-center ${searchFocused ? "outline-amber-50" : "outline-amber-200"}`}>
-                    <input className={"p-2 bg-transparent rounded-3xl focus:outline-0"} value={search} onChange={(e)=>{
+                <div className={`flex items-center bg-white rounded-2xl drop-shadow-2xl ${searchFocused ? "outline-amber-50" : "outline-amber-200"}`}>
+                    <input className={"p-2 text-blue-5 font-medium bg-transparent rounded-3xl focus:outline-0"} value={search} onChange={(e)=>{
                         setSearch(e.target.value.toString())
                     }} type="text" placeholder={"Search..."} onFocus={()=>setSearchFocused(true)}/>
                     <BiSearch className={"text-3xl"} />

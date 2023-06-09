@@ -23,12 +23,26 @@ const TowerElement:FC<TowerElementProps> = ({name, latitude, longitude, rangeInM
 
 
     return (
-        <div className={"flex items-center bg-gray-800 mt-4 p-2"}>
-            <span className={"cursor-pointer"} onClick={()=>{router.push(`/towers/details/${id}`)}}>{name}</span>
-            <span className={"ml-4"}>{latitude}</span>
-            <span className={"ml-4"}>{longitude}</span>
-            <span className={"ml-4"}>{rangeInMeters}</span>
-            <BiTrash className={"ml-4 text-2xl text-red-700 cursor-pointer"} onClick={handleDeleteTower} />
+        <div className={"relative shadow-blue-5 grid grid-cols-4 grid-rows-1 items-center bg-white mt-4 p-4 rounded-2xl"}>
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            <div >
+                {/* eslint-disable-next-line react/no-unescaped-entities */}
+                <p className={'text-blue-4 text-sm'}>Ім'я</p>
+                <span className={"cursor-pointer text-xl font-medium text-blue-5"} onClick={()=>{router.push(`/towers/details/${id}`)}}>{name}</span>
+            </div>
+            <div className={""}>
+                <p className={'text-blue-4 text-sm'}>Широта</p>
+                <span className={"text-xl font-medium text-blue-5"}>{latitude}</span>
+            </div>
+            <div className={""}>
+                <p className={'text-blue-4 text-sm'}>Довгота</p>
+                <span className={"text-xl font-medium text-blue-5"}>{longitude}</span>
+            </div>
+            <div className={""}>
+                <p className={'text-blue-4 text-sm'}>Відстань в метрах</p>
+                <span className={"text-xl font-medium text-blue-5"}>{rangeInMeters}</span>
+            </div>
+            <BiTrash className={"absolute right-4 text-2xl text-blue-5 cursor-pointer"} onClick={handleDeleteTower} />
         </div>
     )
 }

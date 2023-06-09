@@ -26,20 +26,27 @@ const OrdersPage:FC<OrdersPageProps> = () => {
     },[])
 
     return (
-        <div className={'flex-1 min-h-screen min-w-screen p-4'}>
+        <div className={"flex flex-row bg-white-bg min-h-screen w-screen p-4"}>
 
-            <button className={"p-3 bg-gray-800 rounded-3xl mb-4"} onClick={()=>{router.push('/orders/test')}}>
-                Take order (Test)
-            </button>
+
+            {/*<button className={"p-3 bg-gray-800 rounded-3xl mb-4"} onClick={()=>{router.push('/orders/test')}}>*/}
+            {/*    Take order (Test)*/}
+            {/*</button>*/}
 
             <div className={"bg-gray-800 w-full p-3 rounded-3xl"}>
 
                 <div className={`flex w-full items-center ${searchFocused ? "outline-amber-50" : "outline-amber-200"}`}>
-                    <input className={"p-2 bg-transparent rounded-3xl focus:outline-0"} value={search}
-                           onChange={(e) => {
-                               setSearch(e.target.value.toString())
-                           }} type="text" placeholder={"Search..."} onFocus={() => setSearchFocused(true)}/>
-                    <BiSearch className={"text-3xl"}/>
+                    <div className={`flex w-full bg-white p-2 rounded-2xl items-center justify-between`}>
+                        <input className={"p-2 w-full bg-transparent text-blue-5 font-medium placeholder-blue-4 focus:outline-0"} value={search}
+                               onChange={(e) => {
+                                   setSearch(e.target.value.toString())
+                               }} type="text" placeholder={"Пошук..."} onFocus={() => setSearchFocused(true)}/>
+                        <BiSearch className={"text-2xl text-blue-5 m-2 hover:scale-110 hover:text-blue-6 transition-all duration-500"}/>
+                        {/*<button className={"justify-self-end rounded-[50%] bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 p-4"} onClick={()=>{setCreate(true)}}>*/}
+                        {/*    <FaPlus className={"text-l"} />*/}
+                        {/*</button>*/}
+                    </div>
+
                     {/*<button className={"justify-self-end rounded-[50%] bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 p-4"} onClick={()=>{setCreate(true)}}>*/}
                     {/*    <FaPlus className={"text-l"} />*/}
                     {/*</button>*/}
@@ -57,7 +64,7 @@ const OrdersPage:FC<OrdersPageProps> = () => {
 
                 </div>
 
-                <div>
+                <div className={"flex flex-col w-full"}>
                     {ordersList.map(order=><OrderElement key={order.id} id={order.id} location={order.location} orderedBy={order.orderedBy} orderedFullName={order.orderedFullName} finalPrice={order.finalPrice} />)}
                 </div>
 

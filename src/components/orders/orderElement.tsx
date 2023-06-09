@@ -15,11 +15,27 @@ const OrderElement:FC<OrderElementProps> = ({location, orderedBy, orderedFullNam
     const router = useRouter()
 
     return (
-        <div className="flex items-center">
-            <span className={"cursor-pointer"} onClick={()=>{router.push(`/orders/details/${id}`)}}>{location}</span>
-            <span className={"ml-4"} >{orderedBy}</span>
-            <span className={"ml-4"} >{orderedFullName}</span>
-            <span className={"ml-4"} >{finalPrice}</span>
+        <div className={"relative drop-shadow-3xl shadow-blue-5 grid grid-cols-4 grid-rows-1 items-center bg-white mt-4 p-4 rounded-2xl"}>
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            <div >
+                {/* eslint-disable-next-line react/no-unescaped-entities */}
+                <p className={'text-blue-4 text-sm'}>Локація</p>
+                <span className={"cursor-pointer text-xl font-medium text-blue-5"}>{location}</span>
+            </div>
+            <div className={""}>
+                <p className={'text-blue-4 text-sm'}>Замовлено</p>
+                <span className={"text-xl font-medium text-blue-5"}>{orderedBy}</span>
+            </div>
+            <div className={""}>
+                {/* eslint-disable-next-line react/no-unescaped-entities */}
+                <p className={'text-blue-4 text-sm'}>Повне ім'я замовника</p>
+                <span className={"text-xl font-medium text-blue-5"}>{orderedFullName}</span>
+            </div>
+            <div className={""}>
+                <p className={'text-blue-4 text-sm'}>Фінальна ціна</p>
+                <span className={"text-xl font-medium text-blue-5"}>{finalPrice}</span>
+            </div>
+            {/*<BiTrash className={"absolute right-4 text-2xl text-blue-5 cursor-pointer"} onClick={handleDeleteTower} />*/}
         </div>
     )
 }
