@@ -77,8 +77,8 @@ const ProductPage:FC = () => {
                     if (e.target.closest('div.absolute') == e.target) setCreate(false)
                 }}>
                     <div className={"h-full bg-white rounded-3xl "}>
-                        <div className="flex flex-col  mt-8 h-2/3 p-4 items-center justify-between py-8 ">
-                            <p className={"text-blue-5 font-semibold text-xl"}>Додати башту</p>
+                        <div className="flex flex-col  mt-4 h-2/3 p-4 items-center justify-between py-4 ">
+                            <p className={"text-blue-5 font-semibold text-xl"}>Додати товар</p>
                             <input
                                 className="p-4 py-4 font-medium rounded-xl text-blue-5 w-full border-blue-5 border-2 placeholder-blue-4 focus:outline-0"
                                 type="text"
@@ -107,7 +107,7 @@ const ProductPage:FC = () => {
                                 type="text"
                                 onChange={(e)=>{setImgName(e.target.value)}} value={imgName} placeholder={"Тут потім буде картинка(любий текст сюда).."}
                             />
-                            <button onClick={submitCreate} className="bg-gradient-to-r from-blue-5 to-blue-3 rounded-2xl p-4 w-full">Створити</button>
+                            <button onClick={submitCreate} className="bg-gradient-to-tr from-blue-5 to-blue-4 rounded-2xl p-4 w-full">Створити</button>
                         </div>
                     </div>
                 </div>

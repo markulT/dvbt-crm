@@ -5,6 +5,7 @@ import {useRouter} from "next/router";
 import {getPageClients} from "@/store/reducers/clientReducer";
 import ClientElement from "@/components/ClientElement";
 import Paginator from "@/components/Paginator";
+import OrderElement from "@/components/orders/orderElement";
 
 
 export default function Clients() {
@@ -25,24 +26,25 @@ export default function Clients() {
         }
     }, [])
 
-
-
     return (
-        <div className={'flex-1 bg-blue-5 min-h-screen min-w-screen p-4'}>
+        <div className={"flex flex-row bg-white-bg min-h-screen w-screen p-4"}>
             <div className={"bg-gray-800 w-full p-3 rounded-3xl"}>
 
-                <div className={`flex items-center bg-white rounded-2xl drop-shadow-2xl ${searchFocused ? "outline-amber-50" : "outline-amber-200"}`}>
-                    <input className={"p-2 text-blue-5 font-medium bg-transparent rounded-3xl focus:outline-0"} value={search} onChange={(e)=>{
-                        setSearch(e.target.value.toString())
-                    }} type="text" placeholder={"Search..."} onFocus={()=>setSearchFocused(true)}/>
-                    <BiSearch className={"text-3xl"} />
+                <div className={`flex w-full items-center ${searchFocused ? "outline-amber-50" : "outline-amber-200"}`}>
+                    <div className={`flex w-full bg-white p-2 rounded-2xl items-center justify-between`}>
+                        <input className={"p-2 w-full bg-transparent text-blue-5 font-medium placeholder-blue-4 focus:outline-0"} value={search}
+                               onChange={(e) => {
+                                   setSearch(e.target.value.toString())
+                               }} type="text" placeholder={"Пошук..."} onFocus={() => setSearchFocused(true)}/>
+                        <BiSearch className={"text-2xl text-blue-5 m-2 hover:scale-110 hover:text-blue-6 transition-all duration-500"}/>
+                    </div>
                 </div>
 
-                <div>
+                <div className={"flex flex-col w-full"}>
+                    {/* eslint-disable-next-line react/jsx-key */}
                     {clientList ? clientList.map((client)=>(<ClientElement fullName={client.fullName} email={client.email} id={client.id}/>)) : ''}
                 </div>
 
-                <Paginator name={"clients"} length={length} pageSize={5}/>
 
             </div>
         </div>
