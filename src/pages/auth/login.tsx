@@ -20,6 +20,8 @@ export default function Login() {
             return
         }
 
+
+
         // dispatch(fetchProducts())
         dispatch(login({email: email, password: password}))
     }
@@ -57,7 +59,7 @@ export default function Login() {
                     {/*<input placeholder={"Password"} className={"inline-block text-green-950"} type="text" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>*/}
 
                     {/*<button onClick={sendLogin}>Send</button>*/}
-                    <button className={"mt-4 text-blue-5"} onClick={testRefresh}>Test</button>
+                    {/*<button className={"mt-4 text-blue-5"} onClick={testRefresh}>Test</button>*/}
                 </div>
                 <div className={'flex w-1/2 h-1/2'}>
                     <div className="flex flex-col justify-center">

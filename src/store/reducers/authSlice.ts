@@ -24,15 +24,13 @@ const initialState:IAuthState = {
 }
 
 export const login = createAsyncThunk<any,any,any>('auth/login', async ({email, password}) => {
-
-    const response = await axios.post<ILoginResponse>(`https://bee8-46-219-225-231.ngrok-free.app/api/v1/auth/login`, {email:email, password:password}, {withCredentials:true})
+    const response = await axios.post<ILoginResponse>(`${process.env.SERVER_URL}/api/v1/auth/login`, {email:email, password:password}, {withCredentials:true})
     sessionStorage.setItem('accessToken', response.data.accessToken)
     return response.data;
 })
 export const refresh = createAsyncThunk<any,any,any>('auth/refresh',async ()=>{
 
     const response = await axios.post(`${process.env.SERVER_URL}/api/v1/auth/refresh`, {}, {withCredentials:true})
-
     sessionStorage.setItem('accessToken', response.data.accessToken)
     return response.data;
 })

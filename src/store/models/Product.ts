@@ -12,6 +12,7 @@ export interface Product {
     packagement:string,
     imgName:string,
     id?:string
+    rangeInMeters:number
 }
 export interface ShortProduct {
     name:string,

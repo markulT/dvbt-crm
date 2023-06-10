@@ -2,15 +2,18 @@ import {FC, useState} from "react";
 import {BiCross, BiPen} from "react-icons/bi";
 import {useAppDispatch} from "@/store/hooks/redux";
 import {updateProduct} from "@/store/reducers/products/productThunks";
+import {type} from "os";
 
 interface ProductFieldProps {
     title: string,
     value: any,
     name: string,
-    id: string
+    id: string,
+    refreshCallback:Function,
+    castTo?:any
 }
 
-const ProductField: FC<ProductFieldProps> = ({title, value, name, id}) => {
+const ProductField: FC<ProductFieldProps> = ({title, value, name, id, refreshCallback, castTo}) => {
 
 
     const [newValue, setNewValue] = useState<any>(value)
@@ -18,11 +21,18 @@ const ProductField: FC<ProductFieldProps> = ({title, value, name, id}) => {
     const [active, setActive] = useState<boolean>(false)
 
     async function updateField() {
-        if (newValue == value || value == '' || name == '') {
+        if (newValue == value || newValue == '' || name == '') {
             return
         }
-        dispatch(updateProduct({id: id, field: name, value: newValue}))
-
+        switch (castTo) {
+            case "number":
+                await dispatch(updateProduct({id: id, field: name, value: Number(newValue)}))
+                refreshCallback()
+            default:
+                await dispatch(updateProduct({id: id, field: name, value: newValue}))
+                refreshCallback()
+        }
+        setActive(false)
     }
 
     return (

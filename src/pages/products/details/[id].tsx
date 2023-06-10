@@ -28,8 +28,7 @@ const ProductsDetails: FC = () => {
     const imgUrl = useAppSelector((state) => state.product.currentImageUrl)
     const categoryList = useAppSelector((state) => state.categories.list)
     const [chosenCategory, setChosenCategory] = useState<string>('')
-
-    useEffect(() => {
+    async function fetchData() {
         if (router.query.id) {
             dispatch(getSingleProduct({id: router.query.id.toString()}))
             dispatch(getProductImage({id: router.query.id.toString()}))
@@ -38,20 +37,28 @@ const ProductsDetails: FC = () => {
         if (!email) {
             router.push('/auth/login')
         }
-    }, [])
-
-    function handleUpdateImage() {
-        const formData = new FormData();
-        formData.append("file", image, image.name)
-        formData.append("productId", product.id?.toString())
-        dispatch(setProductImage({formData: formData}))
     }
 
-    function assignCategory() {
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    async function handleUpdateImage() {
+        const formData = new FormData();
+
+        formData.append("file", image, image.name)
+        formData.append("productId", product.id?.toString())
+        // console.log(formData.get("file"))
+        await dispatch(setProductImage({formData: formData}))
+        fetchData()
+    }
+
+    async function assignCategory() {
         if(chosenCategory == null || product.id == undefined) {
             return
         }
-        dispatch(updateProductCategory({categoryId:chosenCategory, productId:product.id?.toString()}))
+        await dispatch(updateProductCategory({categoryId:chosenCategory, productId:product.id?.toString()}))
+        fetchData()
     }
 
 
@@ -81,18 +88,24 @@ const ProductsDetails: FC = () => {
                 <Image width={500} height={500} src={imgUrl} alt="Image"/>
             </div>
 
-            <ProductField title={"Назва"} value={product?.name} name={"name"} id={product?.id?.toString()}/>
-            <ProductField title={"Повна назва"} value={product?.title} name={"title"} id={product?.id?.toString()}/>
+            <ProductField title={"Назва"} value={product?.name} name={"name"} id={product?.id?.toString()} refreshCallback={fetchData}/>
+            <ProductField title={"Повна назва"} value={product?.title} name={"title"} id={product?.id?.toString()} refreshCallback={fetchData}/>
             {/* Короче в тому product дофіга різної галіматні, яку можна по-різному відображати
                 Роби з цим, що хочеш
                 TODO: для тої всьої галіматні норм дизайн зробити
              */}
-            <ProductField title={"Ціна в шекелях"} value={product?.price} name={"price"} id={product?.id?.toString()}/>
-            <ProductField title={"тут потім буде картинка"} value={product?.imgName} name={"imgName"}
+            <ProductField title={"Ціна в шекелях"} value={product?.price} name={"price"} refreshCallback={fetchData} id={product?.id?.toString()}/>
+            <ProductField title={"тут потім буде картинка"} value={product?.imgName} refreshCallback={fetchData} name={"imgName"}
                           id={product?.id?.toString()}/>
-            <ProductField title={"Упакування"} value={product?.packagement} name={"packagement"}
+            <ProductField title={"Упакування"} refreshCallback={fetchData} value={product?.packagement} name={"packagement"}
                           id={product?.id?.toString()}/>
-            <ProductField title={"Amplification"} value={product?.amplification} name={"amplification"}
+            <ProductField refreshCallback={fetchData} title={"Amplification"} value={product?.amplification} name={"amplification"}
+                          id={product?.id?.toString()}/>
+            <ProductField refreshCallback={fetchData} title={"Канали"} value={product?.chanel} name={"chanel"}
+                          id={product?.id?.toString()}/>
+            <ProductField refreshCallback={fetchData} title={"Довжина (см)"} castTo={"number"} value={product?.length} name={"length"}
+                          id={product?.id?.toString()}/>
+            <ProductField refreshCallback={fetchData} title={"Максимально допустима відстань сигналу в метрах (при ідеальних умовах)"} castTo={"number"} value={product?.rangeInMeters} name={"rangeInMeters"}
                           id={product?.id?.toString()}/>
 
             <div className={"mt-4"}>

@@ -39,7 +39,7 @@ interface IPage<T> {
 }
 
 export const getPageClients = createAsyncThunk('client/getPage', async (body:IGetPage)=>{
-    const response = await api.get<IPage<IClient>>(`http://localhost:8000/api/v1/users/page?pageSize=${body.pageSize}&pageNumber=${body.pageNumber}`)
+    const response = await api.get<IPage<IClient>>(`${process.env.SERVER_URL}/api/v1/users/page?pageSize=${body.pageSize}&pageNumber=${body.pageNumber}`)
     return response.data;
 })
 export const getClient = createAsyncThunk('client/get', async (body:IGetClient)=>{

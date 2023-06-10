@@ -2,11 +2,11 @@ import axios from "axios";
 
 export const serverUrl = "https://07f2-46-219-225-231.ngrok-free.app"
 
+// @ts-ignore
 const api = axios.create({
     withCredentials: true,
     baseUrl: '',
     headers:{
-        'Content-Type':"application/json",
         'ngrok-skip-browser-warning':true
     }
 })

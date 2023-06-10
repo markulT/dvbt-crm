@@ -34,6 +34,7 @@ export const deleteProduct = createAsyncThunk('product/delete', async (body:GetB
 })
 
 export const updateProduct = createAsyncThunk('product/update', async (body:UpdateItem<any>)=> {
+    console.log(typeof body.value)
     const response = await api.put<Product>(`${process.env.SERVER_URL}/api/v1/products/update/${body.id}`, {
         id:body.id,
         fieldValue:body.value,

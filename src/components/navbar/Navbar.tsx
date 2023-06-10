@@ -119,7 +119,7 @@ export default function Navbar() {
                 {navItems.map((item, index) => (
                     <div
                         key={index}
-                        className={`pl-4 pr-4 text-${mainColor} flex items-center ${pathname === `/${item.path}` ? `bg-${mainColor} p-4 cursor-pointer rounded-2xl text-white-bg transition-all duration-500`
+                        className={` cursor-pointer pl-4 pr-4 text-blue-5 flex items-center ${pathname === `/${item.path}` ? `bg-${mainColor} p-4 cursor-pointer rounded-2xl text-white-bg transition-all duration-500`
                                 : ""
                         } ${isExpanded ? "" : "justify-center"} transition-all duration-500`}
                         onClick={() => index !== 0 ? goTo(item.url) : ''}
