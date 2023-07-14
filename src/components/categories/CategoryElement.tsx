@@ -5,10 +5,11 @@ import {deleteCategoryThunk, getAllCategories} from "@/store/reducers/category/c
 
 interface CategoryElementProps {
     name:string,
-    id:string
+    id:string,
+    onClick:Function
 }
 
-const CategoryElement:FC<CategoryElementProps> = ({name, id}) => {
+const CategoryElement:FC<CategoryElementProps> = ({name, id, onClick}) => {
 
     const dispatch = useAppDispatch();
 
@@ -17,7 +18,7 @@ const CategoryElement:FC<CategoryElementProps> = ({name, id}) => {
         dispatch(getAllCategories())
     }
     return (
-        <div className={"relative text-blue-5 drop-shadow-3xl shadow-blue-5 grid grid-cols-2 grid-rows-1 items-center bg-white mt-4 p-4 rounded-2xl"}>
+        <div className={"relative text-blue-5 drop-shadow-3xl shadow-blue-5 grid grid-cols-2 grid-rows-1 items-center bg-white mt-4 p-4 rounded-2xl"} onClick={onClick}>
             <div>
                 <p className={'text-blue-4 text-sm'}>Назва</p>
                 <span className={"cursor-pointer text-xl font-medium text-blue-5"}>{name}</span>

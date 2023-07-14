@@ -15,6 +15,10 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+.pb-cardAspect{padding-bottom:100%}
+.unselectable {
+  user-select: none;
+}
 
 body {
   color: rgb(var(--foreground-rgb));

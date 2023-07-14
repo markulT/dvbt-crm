@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { AiOutlineTag, AiOutlineUser } from "react-icons/ai";
-import { BiCart, BiShoppingBag } from "react-icons/bi";
+import {BiCart, BiFlag, BiShoppingBag} from "react-icons/bi";
 import { TbEngine } from "react-icons/tb";
 import { FaUserTag } from "react-icons/fa";
 import { RiGroupLine, RiListUnordered } from "react-icons/ri";
@@ -76,6 +76,12 @@ export default function Navbar() {
             text: "Замовлення",
             path: "orders/[page]",
             url: "orders/1",
+        },
+        {
+            Icon:BiFlag,
+            text:"Баннери",
+            path:"banner/[page]",
+            url:'banner/1'
         },
         {
             Icon: FaUserTag,

@@ -1,10 +1,17 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {CreateOrder, IFullOrder, IOrder} from "@/store/models/IOrders";
-import {getAllOrders, getOrderDetails, intentOrder} from "@/store/reducers/orders/orderThunks";
+import {CreateOrder, IFullOrder, IOrder, OrderItem} from "@/store/models/IOrders";
+import {
+    getAllOrders,
+    getOrderDetails,
+    getOrderProduct,
+    GetOrderProductResponse,
+    intentOrder
+} from "@/store/reducers/orders/orderThunks";
 import {GetPageResponse} from "@/store/types/GetPage";
 import {Product} from "@/store/models/Product";
 import {Payload} from "@react-spring/animated";
 import productItem from "@/components/products/ProductItem";
+import {extractInterceptionRouteInformation} from "next/dist/server/future/helpers/interception-routes";
 
 interface OrdersState {
     list:IOrder[],
@@ -12,7 +19,8 @@ interface OrdersState {
     length:number,
     error:string,
     clientSecret:string,
-    createOrder:CreateOrder
+    createOrder:CreateOrder,
+    currentOrderItems:OrderItem[]
 }
 
 const initialState:OrdersState = {
@@ -24,7 +32,8 @@ const initialState:OrdersState = {
     createOrder:{
         productList: [],
         location:''
-    }
+    },
+    currentOrderItems:[]
 }
 
 interface EditProductQuantity {
@@ -55,10 +64,17 @@ export const orderSlice = createSlice({
             state.length = action.payload.length;
         },
         [getOrderDetails.fulfilled.type]:(state, action:PayloadAction<IOrder>) => {
+            state.currentOrderItems = []
             state.currentOrder = action.payload;
         },
         [intentOrder.fulfilled.type]:(state,action:PayloadAction<string>) => {
             state.clientSecret = action.payload;
+        },
+        [getOrderProduct.fulfilled.type]:(state, action:PayloadAction<GetOrderProductResponse>) => {
+            state.currentOrderItems.unshift({
+                product: action.payload.product,
+                quantity: action.payload.quantity,
+            })
         }
     }
 })

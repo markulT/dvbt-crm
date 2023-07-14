@@ -46,6 +46,10 @@ export const getClient = createAsyncThunk('client/get', async (body:IGetClient)=
     const response = await api.get<IFullClient>(`${process.env.SERVER_URL}/api/v1/users/userInfo/${body.id}`);
     return response.data;
 })
+export const getClientShort = createAsyncThunk('client/get', async (body:IGetClient)=>{
+    const response = await api.get<IFullClient>(`${process.env.SERVER_URL}/api/v1/users/userShort/${body.id}`);
+    return response.data;
+})
 export const deleteClient = createAsyncThunk('client/delete', async(body:IDeleteClient)=>{
     const response = await api.delete(`${process.env.SERVER_URL}/api/v1/users/delete/${body.id}`);
     return null;
@@ -72,7 +76,10 @@ export const clientSlice = createSlice({
         },
         [getClient.fulfilled.type]:(state, action:PayloadAction<IFullClient>) => {
             state.currentClient = action.payload
-        }
+        },
+        [getClientShort.fulfilled.type]:(state, action:PayloadAction<IFullClient>) => {
+            state.currentClient = action.payload
+        },
     }
 })
 export default clientSlice.reducer;

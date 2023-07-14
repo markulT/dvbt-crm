@@ -8,6 +8,7 @@ import categoryReducer from '@/store/reducers/category/categorySlice'
 import towerReducer from '@/store/reducers/tower/towerSlice'
 import orderReducer from '@/store/reducers/orders/orderSlice'
 import engineerReducer from '@/store/reducers/engineers/enginereSlice'
+import bannerReducer from '@/store/reducers/banners/bannerSlice'
 
 const reducers = {
     productReducer,
@@ -22,12 +23,13 @@ export const rootReducer = combineReducers({
     categories:categoryReducer,
     tower:towerReducer,
     orders: orderReducer,
-    engineers: engineerReducer
+    engineers: engineerReducer,
+    banners: bannerReducer
 })
 
 export const store = configureStore({
-        reducer: rootReducer,
-        middleware:(getDefaultMiddleware) => getDefaultMiddleware().concat(thunkMiddleware)
+    reducer: rootReducer,
+    middleware:(getDefaultMiddleware) => getDefaultMiddleware().concat(thunkMiddleware)
 })
 
 

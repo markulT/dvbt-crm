@@ -1,11 +1,13 @@
 import {FC, useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import {BiSearch} from "react-icons/bi";
+import {BiLeftArrow, BiRightArrow, BiSearch} from "react-icons/bi";
 import {FaPlus} from "react-icons/fa";
 import CategoryElement from "@/components/categories/CategoryElement";
 import {useAppDispatch, useAppSelector} from "@/store/hooks/redux";
 import {getAllOrders} from "@/store/reducers/orders/orderThunks";
 import OrderElement from "@/components/orders/orderElement";
+import Link from "next/link";
+import {MdNavigateBefore, MdNavigateNext} from "react-icons/md";
 
 
 interface OrdersPageProps {}
@@ -24,6 +26,9 @@ const OrdersPage:FC<OrdersPageProps> = () => {
     useEffect(()=>{
         dispatch(getAllOrders({pageNumber:Number(router.query.page), pageSize:10}))
     },[])
+    useEffect(()=>{
+        dispatch(getAllOrders({pageNumber:Number(router.query.page), pageSize:10}))
+    },[router.query.page])
 
     return (
         <div className={"flex flex-row bg-white-bg min-h-screen w-screen p-4"}>
@@ -68,6 +73,14 @@ const OrdersPage:FC<OrdersPageProps> = () => {
                     {ordersList.map(order=><OrderElement key={order.id} id={order.id} location={order.location} orderedBy={order.orderedBy} orderedFullName={order.orderedFullName} finalPrice={order.finalPrice} />)}
                 </div>
 
+                <div className={'flex mt-4'}>
+                    {Number(router.query.page) != 1 && <Link href={`/orders/${Number(router.query.page) - 1}`}>
+                        <MdNavigateBefore className='text-4xl cursor-pointer active:animate-left_pag_animate'/>
+                    </Link>}
+                    <Link href={`/orders/${Number(router.query.page) + 1}`}>
+                        <MdNavigateNext className={'ml-4 text-4xl cursor-pointer active:animate-right_pag_animate'}/>
+                    </Link>
+                </div>
 
             </div>
         </div>

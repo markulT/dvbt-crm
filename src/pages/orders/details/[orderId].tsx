@@ -3,8 +3,11 @@ import {BiArrowBack, BiPen} from "react-icons/bi";
 import {useRouter} from "next/router";
 import {useAppDispatch, useAppSelector} from "@/store/hooks/redux";
 import {IFullOrder} from "@/store/models/IOrders";
-import {getOrderDetails, OrderStatus, updateStatus} from "@/store/reducers/orders/orderThunks";
+import {getOrderDetails, getOrderProduct, OrderStatus, updateStatus} from "@/store/reducers/orders/orderThunks";
 import {FcOk} from "react-icons/fc";
+import {getClient, getClientShort} from "@/store/reducers/clientReducer";
+import {isAwaitExpression} from "tsutils";
+import ProductCard from "@/components/ProductCard";
 
 interface Teleport {
     top: number,
@@ -15,14 +18,29 @@ const OrderDetails: FC = () => {
 
     const router = useRouter()
     const currentOrder: IFullOrder = useAppSelector((state) => state.orders.currentOrder)
+    const orderItems = useAppSelector((state)=>state.orders.currentOrderItems)
     const dispatch = useAppDispatch()
     const [newStatus, setNewStatus] = useState<string>('');
     const [edit, setEdit] = useState<boolean>(false)
     const [shmal, setShmal] = useState(false)
     const [teleport, setTeleport] = useState<Teleport>({top: 0, left: 0})
 
+    async function initOrder() {
+        await fetchData()
+        currentOrder?.productList?.forEach(async (orderItem)=>{
+            console.log('listing all shit')
+            //@ts-ignore
+            await dispatch(getOrderProduct({id: orderItem.productId, quantity:orderItem.quantity }))
+        })
+    }
+
+    async function fetchData() {
+        await dispatch(getOrderDetails({id: router.query.orderId.toString()}))
+        dispatch(getClientShort({id: currentOrder?.orderedBy.toString() }))
+    }
+
     useEffect(() => {
-        dispatch(getOrderDetails({id: router.query.orderId.toString()}))
+        initOrder()
     }, [])
 
     function submitUpdateStatus() {
@@ -48,7 +66,15 @@ const OrderDetails: FC = () => {
 
             <h2>{currentOrder?.orderedBy}</h2>
             <span>{currentOrder?.orderedFullName}</span>
-            <span>{currentOrder?.finalPrice}</span>
+            <span>Адреса: {currentOrder?.location}</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex gap-4">
+                {orderItems && orderItems.map((orderItem)=><ProductCard key={orderItem.product.id} title={orderItem.product.title} imgName={orderItem.product.imgName} price={orderItem.product.price} id={orderItem.product.id} name={orderItem.product.name}/>)}
+            </div>
+            <button className={"block p-4"} onClick={()=>{
+                console.log(currentOrder)
+                console.log(orderItems)
+            }}>Log</button>
+            <span>Сума : {currentOrder?.finalPrice} (гривень)</span>
             <div className={"p-4 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"}>
                 {currentOrder?.orderStatus}
                 <BiPen className={`text-2xl text-yellow-400 cursor-pointer ${edit ? "infinitSpin" : ""}`}

@@ -37,7 +37,9 @@ const CategoryPage: FC = () => {
     return (
         <div className={"flex flex-row bg-white-bg min-h-screen w-screen p-4"}>
             <div className={"flex flex-col w-full"}>
-                {categories?.map(category=><CategoryElement key={category.id} name={category.name} id={category.id} />)}
+                {categories?.map(category=><CategoryElement key={category.id} name={category.name} id={category.id} onClick={()=>{
+                    router.push(`/category/details/${category.id}`)
+                }} />)}
             </div>
 
 
@@ -69,7 +71,6 @@ const CategoryPage: FC = () => {
                             />
                             <button onClick={submitCreate} className="mt-4 bg-gradient-to-tr from-blue-5 to-blue-4 rounded-2xl p-4 w-full">Створити</button>
                         </div>
-                        <p className={"mt-4 p-4 text-blue-5 font-semibold text-xl"}>Я б, звісно, це нафіг звідси забрав, і додав оцю фічу десь в товари, бо по-суті тут тіки Назва, і на цьому все, тому ну таке це в 1 окрему сторінку виносити</p>
                     </div>
                 </div>
             </div>

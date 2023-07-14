@@ -15,7 +15,9 @@ const OrderElement:FC<OrderElementProps> = ({location, orderedBy, orderedFullNam
     const router = useRouter()
 
     return (
-        <div className={"relative drop-shadow-3xl shadow-blue-5 grid grid-cols-4 grid-rows-1 items-center bg-white mt-4 p-4 rounded-2xl"}>
+        <div className={"relative drop-shadow-3xl shadow-blue-5 grid grid-cols-4 grid-rows-1 items-center bg-white mt-4 p-4 rounded-2xl"} onClick={()=>{
+            router.push(`/orders/details/${id}`)
+        }}>
             {/* eslint-disable-next-line react/no-unescaped-entities */}
             <div >
                 {/* eslint-disable-next-line react/no-unescaped-entities */}
