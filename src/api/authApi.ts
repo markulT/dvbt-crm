@@ -5,7 +5,7 @@ export const serverUrl = "https://07f2-46-219-225-231.ngrok-free.app"
 // @ts-ignore
 const api = axios.create({
     withCredentials: true,
-    baseUrl: '',
+    baseURL: '',
     headers:{
         'ngrok-skip-browser-warning':true
     }
