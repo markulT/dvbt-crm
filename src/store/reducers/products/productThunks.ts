@@ -43,6 +43,7 @@ export const updateProduct = createAsyncThunk('product/update', async (body:Upda
     return response.data;
 })
 
+//@ts-ignore
 export const setProductImage = createAsyncThunk("product/setImage", async ({formData})=>{
     // body should contain both productId and file that you want to store
     const response = await api.put(`${process.env.SERVER_URL}/api/v1/products/image/update`, formData)

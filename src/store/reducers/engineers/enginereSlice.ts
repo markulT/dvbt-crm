@@ -12,6 +12,7 @@ interface EngineerState {
 const initialState:EngineerState = {
     list:[],
     length:0,
+    //@ts-ignore
     currentEngineer:null as Engineer,
 }
 

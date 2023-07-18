@@ -1,3 +1,4 @@
+import {IOrder} from "@/store/models/IOrders";
 
 
 export interface IClient {

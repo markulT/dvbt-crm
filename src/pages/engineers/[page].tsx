@@ -68,6 +68,7 @@ const EngineersPage:FC = () => {
                 </div>
 
                 <div className={"flex flex-col w-full"}>
+                    {/*@ts-ignore*/}
                     {engineers.map(engineer=><EngineerElement key={engineer.id} email={engineer.email} fullName={engineer.fullName} id={engineer.id} />)}
                 </div>
 

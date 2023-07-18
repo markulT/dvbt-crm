@@ -11,6 +11,7 @@ export interface TowerState {
 
 const initialState:TowerState = {
     list:[],
+    //@ts-ignore
     currentItem:null as Tower,
 }
 

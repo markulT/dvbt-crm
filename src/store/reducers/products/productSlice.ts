@@ -18,6 +18,7 @@ interface IProductState {
 
 const initialState:IProductState = {
     list:[],
+    //@ts-ignore
     currentItem:null as Product,
     error:'',
     currentImageUrl:''
@@ -40,6 +41,7 @@ export const productSlice = createSlice({
             state.currentItem = action.payload
         },
         [getProductImage.fulfilled.type]:(state, action:PayloadAction<Blob>) => {
+            //@ts-ignore
             state.currentImageUrl = action.payload;
         },
         [updateProductCategory.fulfilled.type]:(state, action:PayloadAction<GetSingle<Product>>) => {

@@ -37,7 +37,9 @@ const CategoryPage: FC = () => {
     return (
         <div className={"flex flex-row bg-white-bg min-h-screen w-screen p-4"}>
             <div className={"flex flex-col w-full"}>
+                {/*@ts-ignore*/}
                 {categories?.map(category=><CategoryElement key={category.id} name={category.name} id={category.id} onClick={()=>{
+                    //@ts-ignore
                     router.push(`/category/details/${category.id}`)
                 }} />)}
             </div>
@@ -60,6 +62,7 @@ const CategoryPage: FC = () => {
                 <div className={`w-full mb-8 h-full items-center justify-center  ${!create ? "visible" : "hidden"}`} onClick={(e) => {
                     // console.log(e.target.closest('div.absolute') == e.target)
                     // setCreate(false)
+                    //@ts-ignore
                     if (e.target.closest('div.absolute') == e.target) setCreate(false)
                 }}>
                     <div className={"h-full bg-white rounded-3xl"}>

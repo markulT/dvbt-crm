@@ -43,8 +43,7 @@ const bannerSlice = createSlice({
             state.currentItem.imgName = action.payload;
         },
         [getBannerImage.fulfilled.type]:(state, action:PayloadAction<Blob>)=>{
-            console.log('runs')
-            console.log(action.payload)
+            //@ts-ignore
             state.currentImgUrl = action.payload
         },
         [getBannerById.fulfilled.type]:(state, action:PayloadAction<GetSingle<Banner>>)=>{

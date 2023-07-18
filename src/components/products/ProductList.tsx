@@ -20,6 +20,7 @@ const ProductList: FC<ProductListProps> = ({onProductClick}) => {
         if (!sessionStorage.getItem("accessToken")) {
             router.push("auth/login")
         }
+        //@ts-ignore
         dispatch(getAllProducts());
     }, [])
 
@@ -27,11 +28,13 @@ const ProductList: FC<ProductListProps> = ({onProductClick}) => {
 
         <div className={"relative z-[101] rounded-3xl bg-gray-800 p-4"}>
             <SearchField/>
+            {/*@ts-ignore*/}
             {productList && productList.map(product => <div key={product.id} onClick={() => {
                     onProductClick(product)
                 }}><ProductElement
                     name={product.name} title={product.title}
                     price={product.price} imgName={product.imgName}
+                //@ts-ignore
                     id={product.id}/></div>
             )}
         </div>

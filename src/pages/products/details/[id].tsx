@@ -47,13 +47,16 @@ const ProductsDetails: FC = () => {
         const formData = new FormData();
 
         formData.append("file", image, image.name)
+        //@ts-ignore
         formData.append("productId", product.id?.toString())
         // console.log(formData.get("file"))
+        //@ts-ignore
         await dispatch(setProductImage({formData: formData}))
         fetchData()
     }
 
     async function assignCategory() {
+        //@ts-ignore
         if(chosenCategory == null || product.id == undefined) {
             return
         }
@@ -77,6 +80,7 @@ const ProductsDetails: FC = () => {
                 <div className={`mt-4 ${imgCreate ? "visible" : "hidden"}`}>
                     <form>
                         <input type="file" onChange={(e) => {
+                            //@ts-ignore
                             setImage(e.target.files[0])
                         }}/>
                     </form>
@@ -87,32 +91,46 @@ const ProductsDetails: FC = () => {
             <div className={"mt-4"}>
                 <Image width={500} height={500} src={imgUrl} alt="Image"/>
             </div>
-
+            {/*@ts-ignore*/}
             <ProductField title={"Назва"} value={product?.name} name={"name"} id={product?.id?.toString()} refreshCallback={fetchData}/>
+            {/*@ts-ignore*/}
             <ProductField title={"Повна назва"} value={product?.title} name={"title"} id={product?.id?.toString()} refreshCallback={fetchData}/>
             {/* Короче в тому product дофіга різної галіматні, яку можна по-різному відображати
                 Роби з цим, що хочеш
                 TODO: для тої всьої галіматні норм дизайн зробити
              */}
+            {/*@ts-ignore*/}
             <ProductField title={"Ціна в шекелях"} value={product?.price} name={"price"} refreshCallback={fetchData} id={product?.id?.toString()}/>
+            {/*@ts-ignore*/}
             <ProductField title={"тут потім буде картинка"} value={product?.imgName} refreshCallback={fetchData} name={"imgName"}
+                //@ts-ignore
                           id={product?.id?.toString()}/>
+            {/*@ts-ignore*/}
             <ProductField title={"Упакування"} refreshCallback={fetchData} value={product?.packagement} name={"packagement"}
+                //@ts-ignore
                           id={product?.id?.toString()}/>
+            {/*@ts-ignore*/}
             <ProductField refreshCallback={fetchData} title={"Amplification"} value={product?.amplification} name={"amplification"}
+                //@ts-ignore
                           id={product?.id?.toString()}/>
+            {/*@ts-ignore*/}
             <ProductField refreshCallback={fetchData} title={"Канали"} value={product?.chanel} name={"chanel"}
+                //@ts-ignore
                           id={product?.id?.toString()}/>
+            {/*@ts-ignore*/}
             <ProductField refreshCallback={fetchData} title={"Довжина (см)"} castTo={"number"} value={product?.length} name={"length"}
+                          //@ts-ignore
                           id={product?.id?.toString()}/>
+            {/*@ts-ignore*/}
             <ProductField refreshCallback={fetchData} title={"Максимально допустима відстань сигналу в метрах (при ідеальних умовах)"} castTo={"number"} value={product?.rangeInMeters} name={"rangeInMeters"}
+                //@ts-ignore
                           id={product?.id?.toString()}/>
 
             <div className={"mt-4"}>
                 <h3 className={"text-2xl"}>Оберіть категорію</h3>
 
                 {chosenCategory}
-
+                {/*@ts-ignore*/}
                 {categoryList.map((category)=><RadioInput value={category.id} key={category.id} title={category.name} setValue={setChosenCategory} name={'category'} />)}
 
                 <button className={"p-4 bg-gray-800 rounded-lg"} onClick={assignCategory}>

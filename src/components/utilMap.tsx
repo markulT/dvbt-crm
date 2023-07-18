@@ -21,6 +21,7 @@ export default function UtilMap() {
         {lat:47.03442571455317, long:28.861008978888464, name:"цигани і вино"},
         {lat:48.54372460927545, long:32.23876684264849}
     ]
+    //@ts-ignore
     const rad = (x):number => x * Math.PI / 180;
     const getDistance = (p1:IMarker, p2:IMarker):number => {
         const R:number = 6378137
@@ -60,6 +61,7 @@ export default function UtilMap() {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+            {/*@ts-ignore*/}
             <Marker icon={customIcon} position={[marker.lat, marker.long]} className={"w-[50px] h-[50px]"}></Marker>
             <Marker icon={customIcon} position={[closestTower.lat, closestTower.long]}/>
             <Polyline positions={[

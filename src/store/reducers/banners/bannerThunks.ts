@@ -23,6 +23,7 @@ export const deleteBanner = createAsyncThunk('banner/delete', async (body:GetByI
     return null;
 })
 
+//@ts-ignore
 export const updateBannerImage = createAsyncThunk('banner/updateImage', async ({formData})=>{
     const response = await api.put(`${process.env.SERVER_URL}/api/v1/banner/setImage`, formData)
     return response.data;

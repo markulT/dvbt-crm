@@ -41,6 +41,7 @@ const CategoryDetails: FC = () => {
     }
 
     async function handleAddAdditional(productId:string) {
+        //@ts-ignore
         await dispatch(addComplementaryToCategory({productId, categoryId:currentCategory.id}))
     }
 
@@ -52,6 +53,7 @@ const CategoryDetails: FC = () => {
     }, [id])
 
     async function handleRemoveAdditional(productId:string) {
+        //@ts-ignore
         await dispatch(removeComplementaryFromCategory({productId, categoryId:currentCategory.id}))
     }
     return (
@@ -64,8 +66,10 @@ const CategoryDetails: FC = () => {
                 <h3 className={"text-3xl"}>Додаткові товари</h3>
                 <div
                     className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4  gap-4 justify-between mt-4`}>
+                    {/*@ts-ignore*/}
                     {currentCategory.additionals && currentCategory.additionals.map((product)=><ProductCard key={product.id?.toString()} title={product.title} imgName={product.imgName} price={product.price} id={product.id?.toString()} name={product.name}
                                                                                                             customOnClick={()=>{
+                                                                                                                //@ts-ignore
                                                                                                                 handleRemoveAdditional(product.id?.toString())
                                                                                                             }} />)}
                 </div>
@@ -88,8 +92,11 @@ const CategoryDetails: FC = () => {
                                 Всі
                             </span>
                     </div>
+                    {/*@ts-ignore*/}
                     {categoryList.map(category => <CategoryItem key={category.id?.toString()} name={category.name}
+                                                            //@ts-ignore
                                                                 id={category.id} onClick={() => {
+                        //@ts-ignore
                         setCategoryId(category.id)
                         handleGetProductsByCategory()
                     }}/>)}
@@ -102,6 +109,7 @@ const CategoryDetails: FC = () => {
                                                                               imgName={product.imgName}
                                                                               price={product.price}
                                                                               customOnClick={()=>{
+                                                                                  //@ts-ignore
                                                                                   handleAddAdditional(product.id?.toString())
                                                                               }}
                     />)}

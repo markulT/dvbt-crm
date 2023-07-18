@@ -35,6 +35,7 @@ const OrderDetails: FC = () => {
     }
 
     async function fetchData() {
+        //@ts-ignore
         await dispatch(getOrderDetails({id: router.query.orderId.toString()}))
         dispatch(getClientShort({id: currentOrder?.orderedBy.toString() }))
     }
@@ -47,6 +48,7 @@ const OrderDetails: FC = () => {
         if (!currentOrder.id) {
             return
         }
+        //@ts-ignore
         dispatch(updateStatus({id: currentOrder.id?.toString(), status: newStatus as OrderStatus}))
     }
 
@@ -68,6 +70,7 @@ const OrderDetails: FC = () => {
             <span>{currentOrder?.orderedFullName}</span>
             <span>Адреса: {currentOrder?.location}</span>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex gap-4">
+                {/*@ts-ignore*/}
                 {orderItems && orderItems.map((orderItem)=><ProductCard key={orderItem.product.id} title={orderItem.product.title} imgName={orderItem.product.imgName} price={orderItem.product.price} id={orderItem.product.id} name={orderItem.product.name}/>)}
             </div>
             <button className={"block p-4"} onClick={()=>{

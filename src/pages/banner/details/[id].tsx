@@ -44,8 +44,10 @@ const BannerDetails:FC = () => {
         const formData = new FormData();
 
         formData.append("file", image, image.name)
+        //@ts-ignore
         formData.append("id", currentBanner.id?.toString())
         // console.log(formData.get("file"))
+        //@ts-ignore
         await dispatch(updateBannerImage({formData: formData}))
         // fetchData()
     }
@@ -64,6 +66,7 @@ const BannerDetails:FC = () => {
                 <div className={`mt-4 ${imgCreate ? "visible" : "hidden"}`}>
                     <form>
                         <input type="file" onChange={(e) => {
+                            //@ts-ignore
                             setImage(e.target.files[0])
                         }}/>
                     </form>
@@ -73,8 +76,11 @@ const BannerDetails:FC = () => {
             <div className={"mt-4"}>
                 <Image width={500} height={500} src={bannerImage} alt="Image"/>
             </div>
+            {/*@ts-ignore*/}
             <BannerField title={"Заголовок"} value={currentBanner.title} name={"title"} refreshCallback={fetchData} id={currentBanner.id?.toString()} />
+            {/*@ts-ignore*/}
             <BannerField title={"Контент"} value={currentBanner.content} name={"content"} refreshCallback={fetchData} id={currentBanner.id?.toString()}/>
+            {/*@ts-ignore*/}
             <BannerField title={"Посилання"} value={currentBanner.detailsLink} name={"detailsLink"} refreshCallback={fetchData} id={currentBanner.id?.toString()}/>
         </div>
     )

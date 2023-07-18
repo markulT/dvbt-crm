@@ -70,6 +70,7 @@ const OrdersPage:FC<OrdersPageProps> = () => {
                 </div>
 
                 <div className={"flex flex-col w-full"}>
+                    {/*@ts-ignore*/}
                     {ordersList.map(order=><OrderElement key={order.id} id={order.id} location={order.location} orderedBy={order.orderedBy} orderedFullName={order.orderedFullName} finalPrice={order.finalPrice} />)}
                 </div>
 

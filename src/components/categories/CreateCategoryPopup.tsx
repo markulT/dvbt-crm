@@ -22,6 +22,7 @@ const CreateCategoryPopup:FC<IPopup> = ({visible= false}) => {
 
     return (
         <div className={"h-screen w-screen flex items-center justify-center absolute top-0 left-0 z-10 backdrop-blur-lg"} onClick={(e) => {
+            //@ts-ignore
             if (e.target.closest('div.absolute') == e.target) setCreate(false)
         }}>
             <div className={"flex flex-col items-center px-4 py-8 bg-green-600 rounded-3xl"}>

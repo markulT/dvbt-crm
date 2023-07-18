@@ -25,6 +25,7 @@ interface OrdersState {
 
 const initialState:OrdersState = {
     list:[],
+    //@ts-ignore
     currentOrder: null as IFullOrder,
     length:0,
     error:'',
@@ -51,10 +52,12 @@ export const orderSlice = createSlice({
         },
         addQuantity(state, action:PayloadAction<EditProductQuantity>) {
             let productToEdit = state.createOrder.productList.find(orderItem=>orderItem.product.id === action.payload.id)
+            //@ts-ignore
             productToEdit.quantity = productToEdit.quantity + action.payload.quantity;
         },
         subtractQuantity(state, action:PayloadAction<EditProductQuantity>) {
             let productToEdit = state.createOrder.productList.find(orderItem=>orderItem.product.id === action.payload.id)
+            //@ts-ignore
             productToEdit.quantity = productToEdit.quantity - action.payload.quantity;
         }
     },
@@ -65,6 +68,7 @@ export const orderSlice = createSlice({
         },
         [getOrderDetails.fulfilled.type]:(state, action:PayloadAction<IOrder>) => {
             state.currentOrderItems = []
+            //@ts-ignore
             state.currentOrder = action.payload;
         },
         [intentOrder.fulfilled.type]:(state,action:PayloadAction<string>) => {

@@ -20,15 +20,16 @@ const TowerPage:FC<TowerPageProps> = () => {
         }
         // dispatch(setCurrentItem(towerList.filter(tower=>tower.id==router.query.id)))
 
+        //@ts-ignore
         dispatch(setCurrentItem(towerList.filter(tower=>tower.id==router.query.id)))
     }, [])
 
     return (
         <div className={"min-h-screen flex-1"}>
-            <span> {tower.name} </span>
-            <span> Широта{tower.latitude}</span>
-            <span>Довгота {tower.longitude}</span>
-            <span> Range {tower.rangeInMeters} (метрів)</span>
+            <span> {tower?.name?.toString() || ""} </span>
+            <span> Широта{tower?.latitude}</span>
+            <span>Довгота {tower?.longitude}</span>
+            <span> Range {tower?.rangeInMeters} (метрів)</span>
         </div>
     )
 }

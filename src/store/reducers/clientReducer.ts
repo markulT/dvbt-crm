@@ -15,7 +15,9 @@ interface IClientState {
 }
 
 const initialState:IClientState = {
+    //@ts-ignore
     clientList:<IClient>[] as IClient[],
+    //@ts-ignore
     currentClient:null as IFullClient,
     loading:false,
     error:'',

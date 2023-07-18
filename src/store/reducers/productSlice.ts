@@ -2,7 +2,11 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {fetchProducts} from "@/store/reducers/ActionCreators";
 
 
+class IProduct {
+}
+
 interface ProductState {
+
     products:IProduct[],
     isLoading:boolean,
     error:string
