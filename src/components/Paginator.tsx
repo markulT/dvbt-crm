@@ -14,6 +14,7 @@ const Paginator:FC<IPaginatorProps> = ({name, length, pageSize}) => {
 
     return (
         <div className={"flex"}>
+            {/*@ts-ignore*/}
             <BiLeftArrow className={`text-2xl ${router.query.page == 1 ? "hidden" : "visible"} cursor-pointer  `} onClick={()=>{
                 router.push(`/${name}/${Number(router.query.page) - 1}`)
             }}/>
