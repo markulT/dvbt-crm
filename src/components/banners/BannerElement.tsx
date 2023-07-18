@@ -11,6 +11,7 @@ const BannerElement:FC<Banner> = ({title, imgName, content, detailsLink, id}) =>
     const dispatch = useAppDispatch()
 
     async function handleDeleteBanner() {
+        //@ts-ignore
         await dispatch(deleteBanner({id:id?.toString()}))
         router.push(`/banner/1`)
     }
