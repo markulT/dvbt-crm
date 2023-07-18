@@ -40,7 +40,7 @@ const Towers:FC<TowerProps> = () => {
     return (
         <div className={"flex flex-row bg-white-bg min-h-screen w-screen p-4"}>
             <div className={"flex flex-col w-full"}>
-                {towers ? towers.map(tower=> <TowerElement name={tower.name} id={tower?.id?.toString()} rangeInMeters={tower.rangeInMeters} longitude={tower.longitude} latitude={tower.latitude} /> ) : ''}
+                {towers ? towers.map(tower=> <TowerElement key={tower.id?.toString()} name={tower.name} id={tower?.id?.toString()} rangeInMeters={tower.rangeInMeters} longitude={tower.longitude} latitude={tower.latitude} /> ) : ''}
             </div>
 
 
