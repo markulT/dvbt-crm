@@ -1,5 +1,6 @@
 import {FC} from "react";
 import {BiTrash} from "react-icons/bi";
+import {IOrder} from "@/store/models/IOrders";
 
 
 
