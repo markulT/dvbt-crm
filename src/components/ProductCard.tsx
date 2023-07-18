@@ -37,6 +37,7 @@ const ProductCard: FC<ProcutCardProps> = ({title, imgName, name, price, id,custo
     }, [])
 
     return (
+        //@ts-ignore
         <div className="" onClick={customOnClick || defaultOnClick}>
             <div
                 className="p-3 bg-white flex flex-col rounded-2xl drop-shadow-xl hover:drop-shadow-xl group hover:scale-105 transition-transform duration-500 cursor-pointer">
