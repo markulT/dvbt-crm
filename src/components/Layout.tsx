@@ -8,6 +8,7 @@ export default function Layout({children}) {
 
     const dispatch = useDispatch()
     useEffect(()=>{
+        //@ts-ignore
         dispatch(refresh())
     },[])
 
