@@ -57,34 +57,42 @@ const CategoryDetails: FC = () => {
         await dispatch(removeComplementaryFromCategory({productId, categoryId:currentCategory.id}))
     }
     return (
-        <div className={"min-h-screen max-w-full p-4"}>
-            <BiArrowBack className={"text-3xl mb-4 mt-4 cursor-pointer"} onClick={() => {
+        <div className={"flex flex-col min-h-screen bg-white-bg w-screen p-8"}>
+            <BiArrowBack className={"text-3xl mb-4 mt-4 cursor-pointer text-blue-5"} onClick={() => {
                 router.back()
             }}/>
-            <div>Назва категорії : {currentCategory.name}</div>
-            <div>
-                <h3 className={"text-3xl"}>Додаткові товари</h3>
-                <div
-                    className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4  gap-4 justify-between mt-4`}>
-                    {/*@ts-ignore*/}
-                    {currentCategory.additionals && currentCategory.additionals.map((product)=><ProductCard key={product.id?.toString()} title={product.title} imgName={product.imgName} price={product.price} id={product.id?.toString()} name={product.name}
-                                                                                                            customOnClick={()=>{
-                                                                                                                //@ts-ignore
-                                                                                                                handleRemoveAdditional(product.id?.toString())
-                                                                                                            }} />)}
+            <div className={"text-blue-5 font-bold text-3xl"}>Назва категорії : {currentCategory.name}</div>
+
+            <div className={"mt-8 flex flex-col bg-white shadow-blue-6 p-4 rounded-xl"}>
+
+                <div className={"flex flex-row justify-between"}>
+                    <h3 className={"text-blue-5 font-semibold text-xl"}>Додаткові товари</h3>
+                    <div className={""}>
+                        <span className={"max-w-sm flex grow-0 items-center cursor-pointer bg-blue-4 hover:bg-blue-5 transition-all duration-500 p-4 rounded-2xl unselectable font-bold"} onClick={()=>{
+                            setEditingAdditionals(prev=>!prev)
+                        }}>
+                            <BiPen className={"text-2xl"}/>
+                            <p>Редагувати додаткові товари</p>
+                        </span>
+                    </div>
+                </div>
+
+                <div className={""}>
+                    <div
+                        className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 justify-between mt-4`}>
+                        {/*@ts-ignore*/}
+                        {currentCategory.additionals && currentCategory.additionals.map((product)=><ProductCard key={product.id?.toString()} title={product.title} imgName={product.imgName} price={product.price} id={product.id?.toString()} name={product.name}
+                                                                                                                customOnClick={()=>{
+                                                                                                                    //@ts-ignore
+                                                                                                                    handleRemoveAdditional(product.id?.toString())
+                                                                                                                }} />)}
+                    </div>
                 </div>
             </div>
-            <div className={""}>
-                <span className={"flex grow-0 items-center cursor-pointer bg-yellow-5 p-4 rounded-2xl unselectable font-bold"} onClick={()=>{
-                    setEditingAdditionals(prev=>!prev)
-                }}>
-                    <BiPen className={"text-2xl"}/>
-                    <p>Редагувати додаткові товари</p>
-                </span>
-            </div>
+
             <div className={`${editingAdditionals ? 'block' : 'hidden'}`}>
-                <div className={"flex"}>
-                    <div className={"rounded-xl bg-blue-2 flex items-center justify-items-center cursor-pointer"}
+                <div className={"flex mt-8"}>
+                    <div className={"rounded-xl px-4 bg-blue-4 hover:bg-blue-5 transition-all duration-500 flex items-center justify-items-center cursor-pointer mr-4"}
                          onClick={() => {
                              handleGetAllProducts()
                          }}>
@@ -102,7 +110,7 @@ const CategoryDetails: FC = () => {
                     }}/>)}
                 </div>
                 <div
-                    className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4  gap-4 justify-between mt-4`}>
+                    className={`mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6  gap-4 justify-between mt-4`}>
                     {productList && productList.map((product) => <ProductCard id={product.id?.toString() || ""}
                                                                               key={product.id} name={product.name}
                                                                               title={product.title}

@@ -9,7 +9,7 @@ interface CategoryItemProps {
 const CategoryItem: FC<CategoryItemProps> = ({name, id, onClick}) => {
     return (
         //@ts-ignore
-        <div className={"rounded-xl bg-blue-2 flex items-center justify-items-center cursor-pointer"} onClick={onClick}>
+        <div className={"rounded-xl bg-blue-4 hover:bg-blue-5 transition-all duration-500 flex items-center justify-items-center cursor-pointer px-4 mr-4"} onClick={onClick}>
             <span className={"text-white text-xl p-3"}>
                 {name}
             </span>

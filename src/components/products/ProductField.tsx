@@ -1,5 +1,6 @@
 import {FC, useState} from "react";
 import {BiCross, BiPen} from "react-icons/bi";
+import {RxCross2} from "react-icons/rx";
 import {useAppDispatch} from "@/store/hooks/redux";
 import {updateProduct} from "@/store/reducers/products/productThunks";
 import {type} from "os";
@@ -37,25 +38,37 @@ const ProductField: FC<ProductFieldProps> = ({title, value, name, id, refreshCal
 
     return (
         <div className={""}>
-            <h4 className={"text-3xl font-bold"}>{title}</h4>
-            <span>{value}</span>
-            {active ?
-                <div>
-                    <input type="text" value={newValue} className={"bg-transparent"} onChange={(e) => {
-                        setNewValue(e.target.value)
-                    }}/>
-                    <div className={"flex"}>
-                        <button className={"bg-green-500 p-4"} onClick={updateField}>Submit</button>
-                        <button className={"p-4"}>
-                            <BiCross className={"text-2xl text-white"} onClick={()=>setActive(false)} />
-                        </button>
+            <h4 className={"text-xl "}>{title}</h4>
+            <div className={`flex ${active ? "flex-col" : "flex-row"} gap-2`}>
+                <span className={"text-2xl font-bold"}>{value}</span>
+                {active ?
+                    <div>
+                        <div className="w-2/3">
+                            <div className="relative h-12 w-full min-w-[200px]">
+                                <input
+                                    className="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                                    placeholder="Нове значення"
+                                    onChange={(e) => {
+                                        setNewValue(e.target.value)
+                                    }}/>
+                            </div>
+                        </div>
+                        {/*<input type="text" value={newValue} className={"bg-transparent border-blue-5 w-full p-2"} onChange={(e) => {*/}
+                        {/*    setNewValue(e.target.value)*/}
+                        {/*}}/>*/}
+                        <div className={"mt-4 flex"}>
+                            <button className={"w-2/3 bg-blue-5 p-4 text-white rounded-xl"} onClick={updateField}>Submit</button>
+                            <button className={"p-4"}>
+                                <RxCross2 className={"text-2xl text-blue-5"} onClick={()=>setActive(false)} />
+                            </button>
+                        </div>
                     </div>
-                </div>
-                :
-                <div className={"flex"}>
-                    <BiPen className={"text-yellow-400 text-2xl cursor-pointer"} onClick={() => setActive(true)}/>
-                </div>
-            }
+                    :
+                    <div className={"flex"}>
+                        <BiPen className={"text-yellow-400 text-2xl cursor-pointer"} onClick={() => setActive(true)}/>
+                    </div>
+                }
+            </div>
         </div>
     )
 }

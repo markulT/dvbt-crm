@@ -16,10 +16,10 @@ const RadioInput:FC<RadioInputProps> = ({value, setValue, title, name}) => {
     }
     return (
         <div>
-            <input type="radio" name={name} id={random} value={value} onChange={()=>{
+            <input type="radio" className={""} name={name} id={random} value={value} onChange={()=>{
                 setValue(value)
             }}/>
-            <label htmlFor={random}>{title}</label>
+            <label className={"ml-2 text-2xl font-bold"} htmlFor={random}>{title}</label>
         </div>
     )
 }

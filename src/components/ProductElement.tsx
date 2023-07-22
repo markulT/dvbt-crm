@@ -26,7 +26,7 @@ const ProductElement: FC<ProductElementProps> = ({name, imgName, title, price, i
     }
 
     return (
-        <div className={"relative shadow-blue-5 grid grid-cols-4 grid-rows-1 items-center bg-white mt-4 p-4 rounded-2xl"}>
+        <div className={"relative shadow-blue-6 drop-shadow-lg grid grid-cols-4 grid-rows-1 items-center bg-white mt-4 p-4 rounded-2xl"}>
             {/* eslint-disable-next-line react/no-unescaped-entities */}
             <div >
                 {/* eslint-disable-next-line react/no-unescaped-entities */}
