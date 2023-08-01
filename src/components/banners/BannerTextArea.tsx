@@ -4,7 +4,7 @@ import {useAppDispatch} from "@/store/hooks/redux";
 import {updateBanner} from "@/store/reducers/banners/bannerThunks";
 import {RxCross2} from "react-icons/rx";
 
-interface BannerFieldProps {
+interface BannerTextAreaProps {
     title:string,
     value:any,
     name:string,
@@ -13,7 +13,7 @@ interface BannerFieldProps {
     id:string
 }
 
-const BannerField:FC<BannerFieldProps> = ({title, castTo, refreshCallback, name,value, id}) => {
+const BannerTextArea:FC<BannerTextAreaProps> = ({title, castTo, refreshCallback, name,value, id}) => {
 
     const [newValue, setNewValue] = useState<any>(value)
     const dispatch = useAppDispatch()
@@ -36,7 +36,7 @@ const BannerField:FC<BannerFieldProps> = ({title, castTo, refreshCallback, name,
                 <span className={"text-2xl font-bold"}>{value}</span>
                 {active ?
                     <div>
-                        <input
+                        <textarea
                             className="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                             placeholder="Нове значення"
                             onChange={(e) => {
@@ -55,7 +55,7 @@ const BannerField:FC<BannerFieldProps> = ({title, castTo, refreshCallback, name,
                     </div>
                 }
             </div>
-        </div>
-    )
+    </div>
+)
 }
-export default BannerField
+export default BannerTextArea

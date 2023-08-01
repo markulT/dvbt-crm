@@ -14,6 +14,7 @@ import {FaPlus} from "react-icons/fa";
 import {getAllCategories} from "@/store/reducers/category/categoryThunks";
 import RadioInput from "@/components/RadioInput";
 import Image from "next/image";
+import BannerTextArea from "@/components/banners/BannerTextArea";
 
 
 const ProductsDetails: FC = () => {
@@ -84,7 +85,7 @@ const ProductsDetails: FC = () => {
                 TODO: для тої всьої галіматні норм дизайн зробити
              */}
                         {/*@ts-ignore*/}
-                        <ProductField title={"Ціна в шекелях"} value={product?.price} name={"price"} refreshCallback={fetchData} id={product?.id?.toString()}/>
+                        <ProductField title={"Ціна в шекелях"} value={product?.price} name={"price"} castTo={"number"} refreshCallback={fetchData} id={product?.id?.toString()}/>
                         {/*@ts-ignore*/}
                         <ProductField title={"тут потім буде картинка"} value={product?.imgName} refreshCallback={fetchData} name={"imgName"}
                             //@ts-ignore

@@ -36,8 +36,10 @@ const ProductElement: FC<ProductElementProps> = ({name, imgName, title, price, i
                 }}>{name}</span>
             </div>
             <div className={""}>
-                <p className={'text-blue-4 text-sm'}>Заголовк</p>
-                <span className={"text-xl font-medium text-blue-5"}>{title}</span>
+                <p className={'text-blue-4 text-sm'}>Заголовок</p>
+                <span className={"text-xl font-medium text-blue-5"}>{title.length > 18
+                    ? `${title.slice(0, 18)}...`
+                    : title}</span>
             </div>
             <div className="max-h-16 overflow-hidden">
                 <p className="text-blue-4 text-sm">Назва картинки</p>

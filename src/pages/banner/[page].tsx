@@ -71,7 +71,7 @@ export default function Clients() {
 
 
             </div>
-            <div className={`w-full mb-8 h-full items-center justify-center  ${!create ? "visible" : "hidden"}`} onClick={(e) => {
+            <div className={`w-1/2 mb-8 h-full items-center justify-center  ${!create ? "visible" : "hidden"}`} onClick={(e) => {
                 // console.log(e.target.closest('div.absolute') == e.target)
                 // setCreate(false)
                 //@ts-ignore

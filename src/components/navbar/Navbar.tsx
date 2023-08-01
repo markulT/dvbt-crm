@@ -38,13 +38,13 @@ export default function Navbar() {
         {
             Icon: AiOutlineUser,
             text: email ? email : "Not logined",
-            path: "",
+            path: "1234567890",
             url: "",
         },
         {
             Icon: RiGroupLine,
             text: "Клієнти",
-            path: "clients/[page]",
+            path: "clients",
             url: "clients/1",
         },
         {
@@ -56,7 +56,7 @@ export default function Navbar() {
         {
             Icon: AiOutlineTool,
             text: "Інсталлятори",
-            path: "engineers/[page]",
+            path: "engineers",
             url: "engineers/1",
         },
         {
@@ -68,19 +68,19 @@ export default function Navbar() {
         {
             Icon: BiShoppingBag,
             text: "Товари",
-            path: "products/[page]",
+            path: "products",
             url: "products/1",
         },
         {
             Icon: BiCart,
             text: "Замовлення",
-            path: "orders/[page]",
+            path: "orders",
             url: "orders/1",
         },
         {
             Icon:BiFlag,
             text:"Баннери",
-            path:"banner/[page]",
+            path:"banner",
             url:'banner/1'
         },
         {
@@ -110,13 +110,13 @@ export default function Navbar() {
                         />
                     </div>
                 ) : (
-                    <div className="relative p-[5%]" onClick={handleClick}>
+                    <div className="relative p-[20%]" onClick={handleClick}>
                         <Image
                             draggable={false}
                             className="rounded-xl"
                             layout="fill"
                             objectFit="contain"
-                            src="/logo-small.png"
+                            src="/logo-min.png"
                             alt="logo"
                         />
                     </div>
@@ -125,7 +125,7 @@ export default function Navbar() {
                 {navItems.map((item, index) => (
                     <div
                         key={index}
-                        className={` cursor-pointer pl-4 pr-4 text-blue-5 flex items-center ${pathname === `/${item.path}` ? `bg-${mainColor} p-4 cursor-pointer rounded-2xl text-white-bg transition-all duration-500`
+                        className={` cursor-pointer pl-4 pr-4 text-blue-5 flex items-center ${pathname.includes(`/${item.path}`) ? `bg-${mainColor} p-4 cursor-pointer rounded-2xl text-white-bg transition-all duration-500`
                                 : ""
                         } ${isExpanded ? "" : "justify-center"} transition-all duration-500`}
                         onClick={() => index !== 0 ? goTo(item.url) : ''}

@@ -25,7 +25,7 @@ const TowerPage:FC<TowerPageProps> = () => {
     }, [])
 
     return (
-        <div className={"min-h-screen flex-1"}>
+        <div className={"min-h-screen w-screen bg-white-bg flex flex-col text-blue-5"}>
             <span> {tower?.name?.toString() || ""} </span>
             <span> Широта{tower?.latitude}</span>
             <span>Довгота {tower?.longitude}</span>
