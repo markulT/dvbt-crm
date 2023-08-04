@@ -44,8 +44,10 @@ const OrderDetails: FC = () => {
 
     async function getProductList() {
         currentOrder.productList.map(async (orderItem)=>{
-            console.log(orderItem.product.id)
-            await dispatch(getSingleProduct({id:orderItem.product.id?.toString() || ""}))
+            //@ts-ignore
+            console.log(orderItem.productId)
+            //@ts-ignore
+            await dispatch(getSingleProduct({id:orderItem.productId || ""}))
         })
     }
 
@@ -108,7 +110,6 @@ const OrderDetails: FC = () => {
             </div>
             <button className={"block p-4"} onClick={()=>{
                 console.log(currentOrder)
-                console.log(orderItems)
             }}>Log</button>
             <span>Сума : {currentOrder?.finalPrice} (гривень)</span>
             <div className={"p-4 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"}>
