@@ -20,7 +20,7 @@ const OrderDetails: FC = () => {
     const router = useRouter()
     const currentOrder: IFullOrder = useAppSelector((state) => state.orders.currentOrder)
     const orderItems = useAppSelector((state)=>state.orders.currentOrderItems)
-    const currentProductList = useAppSelector((state)=> state.orders.currentProductList)
+    const currentProductList = useAppSelector((state)=> state.orders.currentOrderItems)
     const dispatch = useAppDispatch()
     const [newStatus, setNewStatus] = useState<string>('');
     const [edit, setEdit] = useState<boolean>(false)
