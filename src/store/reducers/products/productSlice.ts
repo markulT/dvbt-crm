@@ -38,7 +38,10 @@ export const productSlice = createSlice({
     name:'product',
     initialState,
     reducers:{
-        setError(state, action:PayloadAction<string>) {}
+        setError(state, action:PayloadAction<string>) {},
+        clearProductList(state) {
+            state.currentProductList = []
+        }
     },
     extraReducers: {
         [getAllProducts.fulfilled.type]: (state, action:PayloadAction<GetList<Product>>) => {

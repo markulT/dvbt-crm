@@ -9,6 +9,8 @@ import {getClient, getClientShort} from "@/store/reducers/clientReducer";
 import {isAwaitExpression} from "tsutils";
 import ProductCard from "@/components/ProductCard";
 import {getProductAndPushToList, getProductImage, getSingleProduct} from "@/store/reducers/products/productThunks";
+import {orderSlice} from "@/store/reducers/orders/orderSlice";
+import {productSlice} from "@/store/reducers/products/productSlice";
 
 interface Teleport {
     top: number,
@@ -44,6 +46,7 @@ const OrderDetails: FC = () => {
     }
 
     async function getProductList() {
+        dispatch(productSlice.actions.clearProductList())
         currentOrder.productList.map(async (orderItem)=>{
             //@ts-ignore
             await dispatch(getProductAndPushToList({id:orderItem.productId || "", quantity:orderItem.quantity}))
@@ -51,6 +54,7 @@ const OrderDetails: FC = () => {
     }
 
     useEffect(() => {
+        dispatch(productSlice.actions.clearProductList())
         initOrder()
     }, [])
     useEffect(()=>{
