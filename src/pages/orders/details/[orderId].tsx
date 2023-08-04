@@ -43,6 +43,7 @@ const OrderDetails: FC = () => {
     }
 
     async function getProductList() {
+        console.log(currentOrder.productList)
         currentOrder.productList.map(async (orderItem)=>{
             //@ts-ignore
             console.log(orderItem.productId)

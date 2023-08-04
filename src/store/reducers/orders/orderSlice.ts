@@ -20,7 +20,7 @@ interface OrdersState {
     error:string,
     clientSecret:string,
     createOrder:CreateOrder,
-    currentOrderItems:OrderItem[]
+    currentOrderItems:OrderItem[],
 }
 
 const initialState:OrdersState = {

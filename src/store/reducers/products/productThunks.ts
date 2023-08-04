@@ -23,6 +23,11 @@ export const getSingleProduct = createAsyncThunk('product/get', async (body:GetB
     return response.data;
 })
 
+export const getProductByOrderItem = createAsyncThunk('product/getByOrderItem', async (body:GetByIdRequest)=> {
+    const response = await api.get(`${process.env.SERVER_URL}/api/v1/products/orderItem/${body.id}`)
+    return response.data
+})
+
 export const getAllProducts = createAsyncThunk('product/getAll', async () => {
     const response = await api.get<Product[]>(`${process.env.SERVER_URL}/api/v1/products/all`)
     return response.data;
