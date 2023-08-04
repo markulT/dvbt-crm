@@ -31,7 +31,6 @@ const OrderDetails: FC = () => {
     async function initOrder() {
         await fetchData()
         currentOrder?.productList?.forEach(async (orderItem)=>{
-            console.log('listing all shit')
             //@ts-ignore
             await dispatch(getOrderProduct({id: orderItem.productId, quantity:orderItem.quantity }))
         })
@@ -40,12 +39,22 @@ const OrderDetails: FC = () => {
     async function fetchData() {
         //@ts-ignore
         await dispatch(getOrderDetails({id: router.query.orderId.toString()}))
-        dispatch(getClientShort({id: currentOrder?.orderedBy.toString() }))
+        await dispatch(getClientShort({id: currentOrder?.orderedBy.toString() }))
+    }
+
+    async function getProductList() {
+        currentOrder.productList.map(async (orderItem)=>{
+            console.log(orderItem.product.id)
+            await dispatch(getSingleProduct({id:orderItem.product.id?.toString() || ""}))
+        })
     }
 
     useEffect(() => {
         initOrder()
     }, [])
+    useEffect(()=>{
+        getProductList()
+    }, [currentOrder])
 
     function submitUpdateStatus() {
         if (!currentOrder.id) {
@@ -58,23 +67,6 @@ const OrderDetails: FC = () => {
     function randomTeleport() {
         return Math.floor(Math.random() * 100)
     }
-
-
-    useEffect(() => {
-        // Fetch product details for each product in currentOrder.productList when the component mounts
-        const fetchProductDetails = async () => {
-            if (currentOrder) {
-                const promises = currentOrder.productList.map((product) =>
-                    dispatch(getSingleProduct({ id: product.productId.toString() }))
-                );
-                const productsData = await Promise.all(promises);
-                setProductDetails(productsData);
-            }
-        };
-
-        fetchProductDetails();
-    }, [currentOrder, dispatch]);
-
 
     // top-[${teleport.top}px]
     return (
