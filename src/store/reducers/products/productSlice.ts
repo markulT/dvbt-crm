@@ -57,7 +57,7 @@ export const productSlice = createSlice({
         [updateProductCategory.fulfilled.type]:(state, action:PayloadAction<GetSingle<Product>>) => {
             state.currentItem = action.payload.item;
         },
-        [getProductAndPushToList.fulfilled.type]:(state, action:PayloadAction<GetSingle<OrderItem>>) => {
+        [getProductAndPushToList.fulfilled.type]:(state, action:PayloadAction<GetSingle<any>>) => {
             console.log("shit")
             console.log(action.payload.item)
             state.currentProductList.unshift(action.payload.item)
