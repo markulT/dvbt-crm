@@ -93,10 +93,15 @@ const OrderDetails: FC = () => {
                 {productDetails.map((product, index) => (
                     <ProductCard
                         key={index}
+                        //@ts-ignore
                         title={product.title}
+                        //@ts-ignore
                         imgName={product.imgName}
+                        //@ts-ignore
                         price={product.price}
+                        //@ts-ignore
                         id={product.id}
+                        //@ts-ignore
                         name={product.name}
                     />
                 ))}
