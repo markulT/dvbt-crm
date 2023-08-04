@@ -8,6 +8,7 @@ import {FcOk} from "react-icons/fc";
 import {getClient, getClientShort} from "@/store/reducers/clientReducer";
 import {isAwaitExpression} from "tsutils";
 import ProductCard from "@/components/ProductCard";
+import {getProductImage, getSingleProduct} from "@/store/reducers/products/productThunks";
 
 interface Teleport {
     top: number,
@@ -24,6 +25,8 @@ const OrderDetails: FC = () => {
     const [edit, setEdit] = useState<boolean>(false)
     const [shmal, setShmal] = useState(false)
     const [teleport, setTeleport] = useState<Teleport>({top: 0, left: 0})
+
+    const [productDetails, setProductDetails] = useState([]);
 
     async function initOrder() {
         await fetchData()
@@ -56,22 +59,55 @@ const OrderDetails: FC = () => {
         return Math.floor(Math.random() * 100)
     }
 
+
+    useEffect(() => {
+        // Fetch product details for each product in currentOrder.productList when the component mounts
+        const fetchProductDetails = async () => {
+            if (currentOrder) {
+                const promises = currentOrder.productList.map((product) =>
+                    dispatch(getSingleProduct({ id: product.productId.toString() }))
+                );
+                const productsData = await Promise.all(promises);
+                setProductDetails(productsData);
+            }
+        };
+
+        fetchProductDetails();
+    }, [currentOrder, dispatch]);
+
+
     // top-[${teleport.top}px]
     return (
-        <div className={"min-h-screen"}>
-            <div className={`text-3xl`}>
-                <BiArrowBack
-                    onClick={() => {
-                        router.back()
-                }}/>
+        <div className={"min-h-screen bg-white-bg w-screen p-4 text-blue-5"}>
+            <BiArrowBack className={"text-3xl mb-4 mt-4 cursor-pointer"} onClick={() => {
+                router.back()
+            }}/>
+            <div className={"flex justify-between"}>
+                <div className={"w-1/2 flex flex-col"}>
+                    <h2>{currentOrder?.orderedBy}</h2>
+                    <span>{currentOrder?.orderedFullName}</span>
+                </div>
+            </div>
+            <div className={"flex justify-between"}>
+                <div className={"w-1/2 flex flex-col"}>
+                    <span>Адреса: {currentOrder?.location}</span>
+                </div>
             </div>
 
-            <h2>{currentOrder?.orderedBy}</h2>
-            <span>{currentOrder?.orderedFullName}</span>
-            <span>Адреса: {currentOrder?.location}</span>
+
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex gap-4">
                 {/*@ts-ignore*/}
-                {orderItems && orderItems.map((orderItem)=><ProductCard key={orderItem.product.id} title={orderItem.product.title} imgName={orderItem.product.imgName} price={orderItem.product.price} id={orderItem.product.id} name={orderItem.product.name}/>)}
+                {productDetails.map((product, index) => (
+                    <ProductCard
+                        key={index}
+                        title={product.title}
+                        imgName={product.imgName}
+                        price={product.price}
+                        id={product.id}
+                        name={product.name}
+                    />
+                ))}
             </div>
             <button className={"block p-4"} onClick={()=>{
                 console.log(currentOrder)
