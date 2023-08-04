@@ -96,21 +96,21 @@ const OrderDetails: FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex gap-4">
                 {/*@ts-ignore*/}
-                {currentProductList.map((orderItem, index) => (
+                {currentProductList && currentProductList?.map((orderItem, index) => (
                     <ProductCard
                         key={index}
                         //@ts-ignore
-                        title={orderItem.product.title}
+                        title={orderItem?.product.title}
                         //@ts-ignore
-                        imgName={orderItem.product.imgName}
+                        imgName={orderItem?.product.imgName}
                         //@ts-ignore
-                        price={orderItem.product.price}
+                        price={orderItem?.product.price}
                         //@ts-ignore
-                        id={orderItem.product.id}
+                        id={orderItem?.product.id}
                         //@ts-ignore
-                        name={orderItem.product.name}
+                        name={orderItem?.product.name}
                         //@ts-ignore
-                        quantity={orderItem.quantity}
+                        quantity={orderItem?.quantity}
                     />
                 ))}
             </div>
