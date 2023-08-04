@@ -11,12 +11,13 @@ interface ProcutCardProps {
     price: number,
     id: string,
     name: string,
-    customOnClick?:Function
+    customOnClick?:Function,
+    quantity?:number
 }
 
 
 
-const ProductCard: FC<ProcutCardProps> = ({title, imgName, name, price, id,customOnClick}) => {
+const ProductCard: FC<ProcutCardProps> = ({title, imgName, name, price, id,customOnClick,quantity}) => {
 
     const dispatch = useAppDispatch()
     const [imgUrl, setImgUrl] = useState<any>()
@@ -60,7 +61,12 @@ const ProductCard: FC<ProcutCardProps> = ({title, imgName, name, price, id,custo
                     <p className="text-sm text-blue-3">Ціна:</p>
                     <p className="text-lg text-blue-5 font-medium">{price} грн</p>
                 </div>
-
+                {quantity ?
+                    <div className="mt-4">
+                        <p className="text-sm text-blue-3">Кількість:</p>
+                        <p className="text-lg text-blue-5 font-medium">{quantity} грн</p>
+                    </div>
+                    : ""}
             </div>
         </div>
     )

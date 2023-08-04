@@ -3,6 +3,7 @@ import {Product, ShortProduct} from "@/store/models/Product";
 import api from "@/api/authApi";
 import {GetByIdRequest} from "@/store/types/getByIdRequest";
 import {UpdateItem} from "@/store/types/updateItem";
+import {abortControllerWithReason} from "@reduxjs/toolkit/dist/listenerMiddleware/utils";
 
 
 
@@ -19,8 +20,20 @@ export const createShortProduct = createAsyncThunk('product/createShort',async (
 
 export const getSingleProduct = createAsyncThunk('product/get', async (body:GetByIdRequest) => {
     const response = await api.get<Product>(`${process.env.SERVER_URL}/api/v1/products/${body.id}`)
-    console.log(response.data)
     return response.data;
+})
+
+interface GetByIdOrderItem {
+    id:string,
+    quantity:number
+}
+//@ts-ignore
+export const getProductAndPushToList = createAsyncThunk('product/getAndPush', async (body:GetByIdOrderItem)=> {
+    const response = await api.get<Product>(`${process.env.SERVER_URL}/api/v1/products/${body.id}`)
+    return {
+        product: response.data,
+        quantity: body.quantity
+    }
 })
 
 export const getProductByOrderItem = createAsyncThunk('product/getByOrderItem', async (body:GetByIdRequest)=> {

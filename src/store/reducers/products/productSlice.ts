@@ -1,19 +1,26 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Product, ShortProduct} from "@/store/models/Product";
 import {
-    getAllProducts,
+    getAllProducts, getProductAndPushToList,
     getProductImage,
     getSingleProduct,
     updateProduct, updateProductCategory
 } from "@/store/reducers/products/productThunks";
 import {GetList} from "@/store/types/getList";
 import {GetSingle} from "@/store/types/getSingle";
+import {OrderItem} from "@/store/models/IOrders";
+
+interface FullOrderItem {
+    product:Product,
+    quantity:number
+}
 
 interface IProductState {
     list:ShortProduct[],
     currentItem:Product,
     error:string
     currentImageUrl:string,
+    currentProductList: FullOrderItem[]
 }
 
 const initialState:IProductState = {
@@ -21,7 +28,8 @@ const initialState:IProductState = {
     //@ts-ignore
     currentItem:null as Product,
     error:'',
-    currentImageUrl:''
+    currentImageUrl:'',
+    currentProductList:[]
 }
 
 export const productSlice = createSlice({
@@ -46,6 +54,9 @@ export const productSlice = createSlice({
         },
         [updateProductCategory.fulfilled.type]:(state, action:PayloadAction<GetSingle<Product>>) => {
             state.currentItem = action.payload.item;
+        },
+        [getProductAndPushToList.fulfilled.type]:(state, action:PayloadAction<GetSingle<OrderItem>>) => {
+            state.currentProductList.push(action.payload.item)
         }
     }
 })

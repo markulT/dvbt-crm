@@ -20,6 +20,7 @@ const OrderDetails: FC = () => {
     const router = useRouter()
     const currentOrder: IFullOrder = useAppSelector((state) => state.orders.currentOrder)
     const orderItems = useAppSelector((state)=>state.orders.currentOrderItems)
+    const currentProductList = useAppSelector((state)=> state.orders.currentProductList)
     const dispatch = useAppDispatch()
     const [newStatus, setNewStatus] = useState<string>('');
     const [edit, setEdit] = useState<boolean>(false)
@@ -93,19 +94,21 @@ const OrderDetails: FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex gap-4">
                 {/*@ts-ignore*/}
-                {productDetails.map((product, index) => (
+                {currentProductList.map((orderItem, index) => (
                     <ProductCard
                         key={index}
                         //@ts-ignore
-                        title={product.title}
+                        title={orderItem.product.title}
                         //@ts-ignore
-                        imgName={product.imgName}
+                        imgName={orderItem.product.imgName}
                         //@ts-ignore
-                        price={product.price}
+                        price={orderItem.product.price}
                         //@ts-ignore
-                        id={product.id}
+                        id={orderItem.product.id}
                         //@ts-ignore
-                        name={product.name}
+                        name={orderItem.product.name}
+                        //@ts-ignore
+                        quantity={orderItem.quantity}
                     />
                 ))}
             </div>
