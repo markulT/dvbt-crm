@@ -64,6 +64,7 @@ const OrderDetails: FC = () => {
         if (!currentOrder.id) {
             return
         }
+        // a
         //@ts-ignore
         dispatch(updateStatus({id: currentOrder.id?.toString(), status: newStatus as OrderStatus}))
     }
