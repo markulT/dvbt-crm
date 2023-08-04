@@ -57,10 +57,10 @@ export const productSlice = createSlice({
         [updateProductCategory.fulfilled.type]:(state, action:PayloadAction<GetSingle<Product>>) => {
             state.currentItem = action.payload.item;
         },
-        [getProductAndPushToList.fulfilled.type]:(state, action:PayloadAction<GetSingle<any>>) => {
+        [getProductAndPushToList.fulfilled.type]:(state, action:PayloadAction<any>) => {
             console.log("shit")
-            console.log(action.payload.item)
-            state.currentProductList.unshift(action.payload.item)
+            console.log(action.payload)
+            state.currentProductList.unshift(action.payload)
         }
     }
 })

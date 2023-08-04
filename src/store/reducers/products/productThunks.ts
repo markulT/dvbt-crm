@@ -31,9 +31,9 @@ interface GetByIdOrderItem {
 export const getProductAndPushToList = createAsyncThunk('product/getAndPush', async (body:GetByIdOrderItem)=> {
     console.log(body.id)
     const response = await api.get<Product>(`${process.env.SERVER_URL}/api/v1/products/${body.id}`)
-    console.log(response.data)
+    console.log(response.data.item)
     return {
-        product: response.data,
+        product: response.data.item,
         quantity: body.quantity
     }
 })
