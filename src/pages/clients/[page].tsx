@@ -47,10 +47,10 @@ export default function Clients() {
                     {clientList ? clientList.map((client)=>(<ClientElement fullName={client.fullName} email={client.email} id={client.id}/>)) : ''}
                 </div>
                 <div className={'flex mt-4'}>
-                    {Number(router.query.page) != 1 && <Link href={`/orders/${Number(router.query.page) - 1}`}>
+                    {Number(router.query.page) != 1 && <Link href={`/clients/${Number(router.query.page) - 1}`}>
                         <MdNavigateBefore className='text-4xl cursor-pointer active:animate-left_pag_animate'/>
                     </Link>}
-                    <Link href={`/orders/${Number(router.query.page) + 1}`}>
+                    <Link href={`/clients/${Number(router.query.page) + 1}`}>
                         <MdNavigateNext className={'ml-4 text-4xl cursor-pointer active:animate-right_pag_animate'}/>
                     </Link>
                 </div>
