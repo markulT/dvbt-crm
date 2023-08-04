@@ -8,7 +8,7 @@ import {FcOk} from "react-icons/fc";
 import {getClient, getClientShort} from "@/store/reducers/clientReducer";
 import {isAwaitExpression} from "tsutils";
 import ProductCard from "@/components/ProductCard";
-import {getProductImage, getSingleProduct} from "@/store/reducers/products/productThunks";
+import {getProductAndPushToList, getProductImage, getSingleProduct} from "@/store/reducers/products/productThunks";
 
 interface Teleport {
     top: number,
@@ -49,7 +49,7 @@ const OrderDetails: FC = () => {
             //@ts-ignore
             console.log(orderItem.productId)
             //@ts-ignore
-            await dispatch(getSingleProduct({id:orderItem.productId || ""}))
+            await dispatch(getProductAndPushToList({id:orderItem.productId || "", quantity:orderItem.quantity}))
         })
     }
 
