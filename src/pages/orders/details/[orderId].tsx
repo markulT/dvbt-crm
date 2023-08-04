@@ -57,6 +57,7 @@ const OrderDetails: FC = () => {
         initOrder()
     }, [])
     useEffect(()=>{
+        console.log('triggered')
         getProductList()
     }, [currentOrder])
 
