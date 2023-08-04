@@ -44,10 +44,7 @@ const OrderDetails: FC = () => {
     }
 
     async function getProductList() {
-        console.log(currentOrder.productList)
         currentOrder.productList.map(async (orderItem)=>{
-            //@ts-ignore
-            console.log(orderItem.productId)
             //@ts-ignore
             await dispatch(getProductAndPushToList({id:orderItem.productId || "", quantity:orderItem.quantity}))
         })
@@ -57,7 +54,6 @@ const OrderDetails: FC = () => {
         initOrder()
     }, [])
     useEffect(()=>{
-        console.log('triggered')
         getProductList()
     }, [currentOrder])
 
@@ -65,7 +61,6 @@ const OrderDetails: FC = () => {
         if (!currentOrder.id) {
             return
         }
-        // a
         //@ts-ignore
         dispatch(updateStatus({id: currentOrder.id?.toString(), status: newStatus as OrderStatus}))
     }

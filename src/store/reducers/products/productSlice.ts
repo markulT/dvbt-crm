@@ -58,8 +58,6 @@ export const productSlice = createSlice({
             state.currentItem = action.payload.item;
         },
         [getProductAndPushToList.fulfilled.type]:(state, action:PayloadAction<any>) => {
-            console.log("shit")
-            console.log(action.payload)
             state.currentProductList.unshift(action.payload)
         }
     }
