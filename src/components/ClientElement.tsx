@@ -25,10 +25,18 @@ const ClientElement:FC<IClientElementProps> = ({fullName, email, id}) => {
     }
 
     return (
-        <div className={"flex border-amber-950 mb-4 border-2 grow-0 justify-start"}>
-            <div onClick={()=>{router.push(`/clientPage/${id}`)}}>{fullName}</div>
-            <div onClick={()=>{router.push(`/clientPage/${id}`)}} className={"ml-4"}>{email}</div>
-            <BiTrash className={"ml-4 text-red-700 text-2xl cursor-pointer"} onClick={deleteUser} />
+        <div className={"relative shadow-blue-5 grid grid-cols-4 grid-rows-1 items-center bg-white mt-4 p-4 rounded-2xl"}>
+            <div >
+                {/* eslint-disable-next-line react/no-unescaped-entities */}
+                <p className={'text-blue-4 text-sm'}>Ім'я</p>
+                <span className={"cursor-pointer text-xl font-medium text-blue-5"} onClick={()=>{router.push(`/clientPage/${id}`)}}>{email}</span>
+            </div>
+            <div >
+                {/* eslint-disable-next-line react/no-unescaped-entities */}
+                <p className={'text-blue-4 text-sm'}>Email</p>
+                <span className={"cursor-pointer text-xl font-medium text-blue-5"} onClick={()=>{router.push(`/clientPage/${id}`)}}>{fullName}</span>
+            </div>
+            <BiTrash className={"absolute right-4 text-2xl text-blue-5 cursor-pointer"} onClick={deleteUser} />
         </div>
     )
 }

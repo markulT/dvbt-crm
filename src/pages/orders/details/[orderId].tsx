@@ -33,10 +33,6 @@ const OrderDetails: FC = () => {
 
     async function initOrder() {
         await fetchData()
-        currentOrder?.productList?.forEach(async (orderItem)=>{
-            //@ts-ignore
-            await dispatch(getOrderProduct({id: orderItem.productId, quantity:orderItem.quantity }))
-        })
     }
 
     async function fetchData() {
@@ -73,6 +69,10 @@ const OrderDetails: FC = () => {
         return Math.floor(Math.random() * 100)
     }
 
+    const onClickCard = ()=>{
+        router.push(`/products/1`)
+    }
+
     // top-[${teleport.top}px]
     return (
         <div className={"min-h-screen bg-white-bg w-screen p-4 text-blue-5"}>
@@ -81,22 +81,51 @@ const OrderDetails: FC = () => {
             }}/>
             <div className={"flex justify-between"}>
                 <div className={"w-1/2 flex flex-col"}>
-                    <h2>{currentOrder?.orderedBy}</h2>
-                    <span>{currentOrder?.orderedFullName}</span>
+                    <h2 className={"text-xl"}>Замовник:</h2>
+                    <span className={"text-2xl font-bold"}>{currentOrder?.orderedFullName}</span>
+                    <h2 className={"text-xl mt-4"}>Сума:</h2>
+                    <span className={"text-2xl font-bold"}>{currentOrder?.finalPrice}гривень</span>
+                    <h2 className={"text-xl mt-4"}>Статус замовлення:</h2>
+                    <span className={"text-2xl font-bold"}>{currentOrder?.orderStatus}</span>
                 </div>
+                    <div className={"w-1/2 flex flex-col"}>
+                        <h2 className={"text-xl mt-4"}>Адреса:</h2>
+                        <span className={"text-2xl font-bold"}> {currentOrder?.location}</span>
+                        <div className={""}>
+                            {/*<BiPen className={`text-2xl text-yellow-400 cursor-pointer ${edit ? "infinitSpin" : ""}`}*/}
+                            {/*       onClick={() => {*/}
+                            {/*           setEdit(prev => !prev)*/}
+                            {/*       }}/>*/}
+                            <div className={"flex flex-col"}>
+                                <div className={"flex mt-4 items-center"}>
+                                    <h2 className={"text-xl"}>Змінити статус замовлення:</h2>
+                                    <div className={` w-full h-full`}>
+                                        <select className={"w-2/3 h-full py-4 px-4 rounded-xl text-xl font-semibold"} name="status" id="status" placeholder="Оберіть статус" onChange={(e) => {
+                                            setNewStatus(e.target.value)
+                                        }}>
+                                            <option value="NOT_VIEWED">Не переглянуто</option>
+                                            <option value="VIEWED">Переглянуто</option>
+                                            <option value="SENT">Надіслано</option>
+                                            <option value="COMPLETE">Завершено</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <button onClick={submitUpdateStatus} className={"w-3/4 text-white rounded-xl bg-blue-4 hover:bg-blue-5 transition-all duration-500 p-3 mt-4"}>Оновити статус</button>
+                            </div>
+                        </div>
+                    </div>
             </div>
-            <div className={"flex justify-between"}>
-                <div className={"w-1/2 flex flex-col"}>
-                    <span>Адреса: {currentOrder?.location}</span>
-                </div>
-            </div>
 
 
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex gap-4">
+            <h2 className={"text-xl "}>Корзина замовника:</h2>
+            <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
                 {/*@ts-ignore*/}
                 {currentProductList && currentProductList?.map((orderItem, index) => (
                     <ProductCard
+                        customOnClick={onClickCard}
+
                         key={index}
                         //@ts-ignore
                         title={orderItem?.product.title}
@@ -113,31 +142,10 @@ const OrderDetails: FC = () => {
                     />
                 ))}
             </div>
-            <button className={"block p-4"} onClick={()=>{
-                console.log(currentProductList)
-            }}>Log</button>
-            <span>Сума : {currentOrder?.finalPrice} (гривень)</span>
-            <div className={"p-4 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"}>
-                {currentOrder?.orderStatus}
-                <BiPen className={`text-2xl text-yellow-400 cursor-pointer ${edit ? "infinitSpin" : ""}`}
-                       onClick={() => {
-                           setEdit(prev => !prev)
-                       }}/>
-                <div className={`${edit ? "visible" : "hidden"} mt-4`}>
-                    <select name="status" id="status" onChange={(e) => {
-                        setNewStatus(e.target.value)
-                    }}>
-                        <option value="NOT_VIEWED">Не переглянуто</option>
-                        <option value="VIEWED">Переглянуто</option>
-                        <option value="SENT">Надіслано</option>
-                        <option value="COMPLETE">Завершено</option>
-                    </select>
-                    <button className={"flex items-center mt-4 p-3 bg-gray-800 rounded-3xl"}>
-                        <span className={"text-xl"} onClick={submitUpdateStatus}>Підтвердити</span>
-                        <FcOk className={"text-white text-xl"}/>
-                    </button>
-                </div>
-            </div>
+            {/*<button className={"block p-4"} onClick={()=>{*/}
+            {/*    console.log(currentProductList)*/}
+            {/*}}>Log</button>*/}
+
         </div>
     )
 }

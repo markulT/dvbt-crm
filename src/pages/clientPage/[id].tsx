@@ -20,15 +20,15 @@ const ClientPage:FC = () => {
 
 
     return (
-        <div className={"min-h-screen"}>
+        <div className={"min-h-screen bg-white-bg w-screen p-4 text-blue-5"}>
 
             <BiArrowBack className={"text-3xl mb-4 mt-4 cursor-pointer"} onClick={()=>{router.back()}} />
 
-            <h2>{client?.fullName}</h2>
-            <div className={"flex mt-4"}>
-                <FaUserTag className={"text-2xl"} />
-                <h3>{client?.email}</h3>
-            </div>
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            <h2 className={"text-xl"}>Ім'я:</h2>
+            <span className={"text-2xl font-bold"}>{client?.fullName}</span>
+            <h2 className={"text-xl mt-4"}>Email:</h2>
+            <span className={"text-2xl font-bold"}>{client?.email}</span>
 
 
         </div>

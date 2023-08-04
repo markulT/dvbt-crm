@@ -17,7 +17,7 @@ interface ProcutCardProps {
 
 
 
-const ProductCard: FC<ProcutCardProps> = ({title, imgName, name, price, id,customOnClick,quantity}) => {
+const ProductCard: FC<ProcutCardProps> = ({title, imgName, name, price, id,customOnClick, quantity}) => {
 
     const dispatch = useAppDispatch()
     const [imgUrl, setImgUrl] = useState<any>()
@@ -41,9 +41,9 @@ const ProductCard: FC<ProcutCardProps> = ({title, imgName, name, price, id,custo
         //@ts-ignore
         <div className="" onClick={customOnClick || defaultOnClick}>
             <div
-                className="p-3 bg-white flex flex-col rounded-2xl drop-shadow-xl hover:drop-shadow-xl group hover:scale-105 transition-transform duration-500 cursor-pointer" style={{ boxShadow: '0 0 50px 5px rgba(27, 40, 69, 0.15)' }}>
+                className="p-3 bg-white flex flex-col rounded-2xl drop-shadow-xl hover:drop-shadow-xl group hover:scale-105 transition-transform duration-500 cursor-pointer">
 
-                <div className="relative pb-44   ">
+                <div className="relative pb-cardAspect">
                     <Image
                         draggable={false}
                         className="rounded-xl"
@@ -54,19 +54,26 @@ const ProductCard: FC<ProcutCardProps> = ({title, imgName, name, price, id,custo
                     />
                 </div>
 
-                <h3 className="text-lg text-blue-5  font-bold mt-4 max-w-lg">
+                <h3 className=" sm:truncate text-xl font-bold text-blue-5 font-medium mt-[5%] max-w-lg">
+                    {/*{title.length > maxSymbols*/}
+                    {/*? `${title.slice(0, maxSymbols)}...`*/}
+                    {/*: title}*/}
                     {title}
                 </h3>
-                <div className="mt-4">
-                    <p className="text-sm text-blue-3">Ціна:</p>
-                    <p className="text-lg text-blue-5 font-medium">{price} грн</p>
-                </div>
-                {quantity ?
-                    <div className="mt-4">
-                        <p className="text-sm text-blue-3">Кількість:</p>
-                        <p className="text-lg text-blue-5 font-medium">{quantity} грн</p>
+                <div className={"mt-[5%] flex flex-row"}>
+                    <div className="">
+                        <p className="text-sm text-blue-3">Ціна:</p>
+                        <p className="text-lg text-blue-5 font-medium">{price} грн</p>
                     </div>
-                    : ""}
+                    {quantity ?
+                        <div className="ml-4">
+                            <p className="text-sm text-blue-3">Кількість:</p>
+                            <p className="text-lg text-blue-5 font-medium">{quantity}</p>
+                        </div>
+                        : ""}
+                </div>
+
+
             </div>
         </div>
     )
