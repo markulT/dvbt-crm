@@ -10,6 +10,7 @@ import {GetList} from "@/store/types/getList";
 import {GetSingle} from "@/store/types/getSingle";
 import {OrderItem} from "@/store/models/IOrders";
 import {extractInterceptionRouteInformation} from "next/dist/server/future/helpers/interception-routes";
+import {act} from "react-dom/test-utils";
 
 interface FullOrderItem {
     product:Product,
@@ -57,6 +58,8 @@ export const productSlice = createSlice({
             state.currentItem = action.payload.item;
         },
         [getProductAndPushToList.fulfilled.type]:(state, action:PayloadAction<GetSingle<OrderItem>>) => {
+            console.log("shit")
+            console.log(action.payload.item)
             state.currentProductList.unshift(action.payload.item)
         }
     }
