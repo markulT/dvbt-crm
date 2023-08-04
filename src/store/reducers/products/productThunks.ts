@@ -4,6 +4,7 @@ import api from "@/api/authApi";
 import {GetByIdRequest} from "@/store/types/getByIdRequest";
 import {UpdateItem} from "@/store/types/updateItem";
 import {abortControllerWithReason} from "@reduxjs/toolkit/dist/listenerMiddleware/utils";
+import {GetSingle} from "@/store/types/getSingle";
 
 
 
@@ -30,7 +31,7 @@ interface GetByIdOrderItem {
 //@ts-ignore
 export const getProductAndPushToList = createAsyncThunk('product/getAndPush', async (body:GetByIdOrderItem)=> {
     console.log(body.id)
-    const response = await api.get<Product>(`${process.env.SERVER_URL}/api/v1/products/${body.id}`)
+    const response = await api.get<GetSingle<Product>>(`${process.env.SERVER_URL}/api/v1/products/${body.id}`)
     console.log(response.data.item)
     return {
         product: response.data.item,
