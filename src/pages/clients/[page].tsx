@@ -6,6 +6,8 @@ import {getPageClients} from "@/store/reducers/clientReducer";
 import ClientElement from "@/components/ClientElement";
 import Paginator from "@/components/Paginator";
 import OrderElement from "@/components/orders/orderElement";
+import Link from "next/link";
+import {MdNavigateBefore, MdNavigateNext} from "react-icons/md";
 
 
 export default function Clients() {
@@ -18,7 +20,7 @@ export default function Clients() {
     const email = useAppSelector(state=>state.auth.email)
 
     useEffect(()=>{
-        dispatch(getPageClients({pageNumber: Number(router.query.page), pageSize:5}))
+        dispatch(getPageClients({pageNumber: Number(router.query.page), pageSize:50}))
     },[router.query.page])
     useEffect(()=>{
         if (!email) {
@@ -44,7 +46,14 @@ export default function Clients() {
                     {/* eslint-disable-next-line react/jsx-key */}
                     {clientList ? clientList.map((client)=>(<ClientElement fullName={client.fullName} email={client.email} id={client.id}/>)) : ''}
                 </div>
-
+                <div className={'flex mt-4'}>
+                    {Number(router.query.page) != 1 && <Link href={`/orders/${Number(router.query.page) - 1}`}>
+                        <MdNavigateBefore className='text-4xl cursor-pointer active:animate-left_pag_animate'/>
+                    </Link>}
+                    <Link href={`/orders/${Number(router.query.page) + 1}`}>
+                        <MdNavigateNext className={'ml-4 text-4xl cursor-pointer active:animate-right_pag_animate'}/>
+                    </Link>
+                </div>
 
             </div>
         </div>
