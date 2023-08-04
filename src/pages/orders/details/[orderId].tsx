@@ -114,7 +114,7 @@ const OrderDetails: FC = () => {
                 ))}
             </div>
             <button className={"block p-4"} onClick={()=>{
-                console.log(currentOrder)
+                console.log(currentProductList)
             }}>Log</button>
             <span>Сума : {currentOrder?.finalPrice} (гривень)</span>
             <div className={"p-4 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"}>
