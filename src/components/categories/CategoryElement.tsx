@@ -19,14 +19,14 @@ const CategoryElement:FC<CategoryElementProps> = ({name, id, onClick}) => {
     }
     return (
         //@ts-ignore
-        <div className={"relative text-blue-5 drop-shadow-3xl shadow-blue-5 grid grid-cols-2 grid-rows-1 items-center bg-white mt-4 p-4 rounded-2xl"} onClick={onClick}>
+        <div className={"relative text-blue-5 drop-shadow-3xl shadow-blue-5 grid grid-cols-2 grid-rows-1 items-center bg-white mt-4 p-4 rounded-2xl"} >
             <div>
                 <p className={'text-blue-4 text-sm'}>Назва</p>
-                <span className={"cursor-pointer text-xl font-medium text-blue-5"}>{name}</span>
+                <span className={"cursor-pointer text-xl font-medium text-blue-5"} onClick={onClick}>{name}</span>
             </div>
             <div className={'flex justify-end'}>
                 <BiTrash className={"ml-4 text-2xl text-red-700 cursor-pointer"} onClick={deleteCategory} />
-                <BiPen className={"ml-4 text-2xl text-yellow-400 cursor-pointer"} />
+                <BiPen className={"ml-4 text-2xl text-yellow-400 cursor-pointer"} onClick={onClick} />
             </div>
         </div>
     )

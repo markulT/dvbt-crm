@@ -53,7 +53,7 @@ const ProductsDetails: FC = () => {
         // console.log(formData.get("file"))
         //@ts-ignore
         await dispatch(setProductImage({formData: formData}))
-        fetchData()
+        await fetchData()
     }
 
     async function assignCategory() {
@@ -95,7 +95,7 @@ const ProductsDetails: FC = () => {
                             //@ts-ignore
                                       id={product?.id?.toString()}/>
                         {/*@ts-ignore*/}
-                        <ProductField refreshCallback={fetchData} title={"Amplification"} value={product?.amplification} name={"amplification"}
+                        <ProductField refreshCallback={fetchData} title={"Amplification"} castTo={"number"} value={product?.amplification} name={"amplification"}
                             //@ts-ignore
                                       id={product?.id?.toString()}/>
                         {/*@ts-ignore*/}

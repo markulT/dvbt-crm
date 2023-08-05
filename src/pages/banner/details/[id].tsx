@@ -50,7 +50,7 @@ const BannerDetails:FC = () => {
         // console.log(formData.get("file"))
         //@ts-ignore
         await dispatch(updateBannerImage({formData: formData}))
-        // fetchData()
+        await fetchData()
     }
 
 

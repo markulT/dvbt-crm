@@ -27,7 +27,7 @@ const ClientPage:FC = () => {
             {/* eslint-disable-next-line react/no-unescaped-entities */}
             <h2 className={"text-xl"}>Ім'я:</h2>
             <span className={"text-2xl font-bold"}>{client?.fullName}</span>
-            <h2 className={"text-xl mt-4"}>Email:</h2>
+            <h2 className={"text-xl mt-4np"}>Email:</h2>
             <span className={"text-2xl font-bold"}>{client?.email}</span>
 
 
